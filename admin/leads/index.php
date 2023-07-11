@@ -9,11 +9,11 @@
 <div class="card card-outline card-primary rounded-0 shadow">
 	<div class="card-header">
 		<h3 class="card-title">List of Leads</h3>
-		<?php if($_settings->userdata('type') == 1): ?>
+		<?php  ?>
 		<div class="card-tools">
 			<a href="./?page=leads/manage_lead" class="btn btn-flat btn-sm btn-primary"><span class="fas fa-plus"></span>  Add New Leads</a>
 		</div>
-		<?php endif; ?>
+		<?php  ?>
 	</div>
 	<div class="card-body">
 		<div class="container-fluid">

@@ -37,7 +37,7 @@ if(isset($_GET['id'])){
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <fieldset>
-                                <legend class="text-muted h4">Client Information</legend>
+                                <legend class="text-muted h4">Information</legend>
                                 <div class="callout rounded-0 shadow">
                                     <div class="form-group">
                                         <label for="firstname" class="control-label">First Name</label>
@@ -90,7 +90,7 @@ if(isset($_GET['id'])){
                                         <input type="text" name="interested_in" id="interested_in" class="form-control form-control-sm form-control-border" value ="<?php echo isset($interested_in) ? $interested_in : '' ?>" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="source_id" class="control-label">Lead Source</label>
+                                        <label for="source_id" class="control-label">Lead School</label>
                                         <select name="source_id" id="source_id" class="form-control form-control-sm form-control-border select2" required>
                                             <option value="" disabled <?= !isset($source_id) ? 'selected' : '' ?>></option>
                                             <?php 
