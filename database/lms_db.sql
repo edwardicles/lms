@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 04, 2022 at 08:32 AM
--- Server version: 10.4.19-MariaDB
--- PHP Version: 8.0.7
+-- Generation Time: Jul 11, 2023 at 10:51 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -41,16 +41,14 @@ CREATE TABLE `client_list` (
   `other_info` text DEFAULT NULL,
   `date_created` datetime NOT NULL DEFAULT current_timestamp(),
   `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `client_list`
 --
 
 INSERT INTO `client_list` (`id`, `lead_id`, `firstname`, `middlename`, `lastname`, `gender`, `dob`, `contact`, `email`, `address`, `other_info`, `date_created`, `date_updated`) VALUES
-(1, 3, 'Mark', 'D', 'Cooper', 'Male', '1997-06-23', '09123456789', 'mcooper@abzcompany.com', 'This is my sample Address.', '', '2022-02-04 10:49:01', NULL),
-(2, 4, 'Mike', '', 'Williams', 'Male', '1997-10-14', '09789546123', 'mwilliams@xyzcompany.com', 'Sample Address', '', '2022-02-04 11:40:44', NULL),
-(5, 7, 'Samantha Jane', 'G', 'Miller', 'Female', '1990-07-15', '09456654122', 'sjmiller@sample.com', 'Sample Address', 'Client\\\'s Sample Other Information', '2022-02-04 15:04:33', NULL);
+(2, 4, 'Mike', '', 'Williams', 'Male', '1997-10-14', '09789546123', 'mwilliams@xyzcompany.com', 'Sample Address', '', '2022-02-04 11:40:44', NULL);
 
 -- --------------------------------------------------------
 
@@ -71,16 +69,14 @@ CREATE TABLE `lead_list` (
   `delete_flag` tinyint(1) NOT NULL DEFAULT 0,
   `date_created` datetime NOT NULL DEFAULT current_timestamp(),
   `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `lead_list`
 --
 
 INSERT INTO `lead_list` (`id`, `code`, `source_id`, `interested_in`, `remarks`, `assigned_to`, `user_id`, `status`, `in_opportunity`, `delete_flag`, `date_created`, `date_updated`) VALUES
-(3, '202202-00001', 4, 'Something', 'This is only a sample Lead', 8, 1, 7, 1, 0, '2022-02-04 10:49:01', '2022-02-04 14:54:52'),
-(4, '202202-00002', 4, 'Something', 'Sample Only', 8, 1, 1, 0, 0, '2022-02-04 11:40:43', '2022-02-04 14:21:59'),
-(7, '202202-00003', 3, 'Sample Only 123', 'Sample opportunity Only', 9, 1, 1, 1, 0, '2022-02-04 15:04:33', NULL);
+(4, '202202-00002', 4, 'Something', 'Sample Only', 8, 1, 1, 0, 0, '2022-02-04 11:40:43', '2022-02-04 14:21:59');
 
 -- --------------------------------------------------------
 
@@ -96,15 +92,7 @@ CREATE TABLE `log_list` (
   `user_id` int(30) DEFAULT NULL,
   `date_created` datetime NOT NULL DEFAULT current_timestamp(),
   `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `log_list`
---
-
-INSERT INTO `log_list` (`id`, `lead_id`, `log_type`, `remarks`, `user_id`, `date_created`, `date_updated`) VALUES
-(1, 3, 1, 'Sample Call Log only', 1, '2022-02-04 13:42:06', '2022-02-04 13:42:18'),
-(2, 3, 2, 'Client Called', 1, '2022-02-04 13:46:08', '2022-02-04 13:55:16');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -119,15 +107,7 @@ CREATE TABLE `note_list` (
   `user_id` int(30) DEFAULT NULL,
   `date_created` datetime NOT NULL DEFAULT current_timestamp(),
   `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `note_list`
---
-
-INSERT INTO `note_list` (`id`, `lead_id`, `note`, `user_id`, `date_created`, `date_updated`) VALUES
-(1, 3, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sed dolor at eros tristique dapibus egestas a ante. Morbi luctus semper sem vel tincidunt. Duis at ex vel ex eleifend euismod id ac eros. Morbi at porttitor purus. Donec at laoreet dui, blandit viverra nulla. Praesent eget consequat ligula, aliquam placerat diam. Maecenas fermentum non est ac facilisis. Vivamus non felis elementum, gravida purus interdum, tincidunt libero.', NULL, '2022-02-04 14:13:12', NULL),
-(2, 3, ' Mauris eget tortor imperdiet, vestibulum dolor a, vulputate nisl. Integer facilisis, nibh at porttitor consectetur, sem augue rutrum leo, ac porttitor nibh erat ut sapien. Proin in semper quam, in lobortis odio. Cras gravida vitae risus sed malesuada. Duis sit amet nisl vitae elit vehicula luctus. Duis id magna vel velit molestie facilisis. Maecenas ipsum nulla, auctor sed consequat et, mollis eget urna.', NULL, '2022-02-04 14:13:43', NULL);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -143,18 +123,18 @@ CREATE TABLE `source_list` (
   `delete_flag` tinyint(1) NOT NULL DEFAULT 0,
   `date_created` datetime NOT NULL DEFAULT current_timestamp(),
   `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `source_list`
 --
 
 INSERT INTO `source_list` (`id`, `name`, `description`, `status`, `delete_flag`, `date_created`, `date_updated`) VALUES
-(1, 'Facebook Ad', 'Leads from the Facebook Advertisments.', 1, 0, '2022-02-04 09:26:11', NULL),
-(2, 'Company Website', 'Leads from company website', 1, 0, '2022-02-04 09:27:47', NULL),
-(3, 'Referral', 'Leads from referrals', 1, 0, '2022-02-04 09:28:23', NULL),
-(4, 'Google Ads', 'Leads form Google Ads', 1, 0, '2022-02-04 09:28:54', NULL),
-(5, 'Other Sources', 'Leads that are from unlisted sources.', 1, 0, '2022-02-04 09:29:31', NULL),
+(1, 'Facebook Ad', 'Leads from the Facebook Advertisments.', 1, 1, '2022-02-04 09:26:11', '2023-07-11 15:34:04'),
+(2, 'Company Website', 'Leads from company website', 1, 1, '2022-02-04 09:27:47', '2023-07-11 15:34:00'),
+(3, 'Referral', 'Leads from referrals', 1, 1, '2022-02-04 09:28:23', '2023-07-11 15:34:14'),
+(4, 'Google Ads', 'Leads form Google Ads', 1, 1, '2022-02-04 09:28:54', '2023-07-11 15:34:07'),
+(5, 'Other Sources', 'Leads that are from unlisted sources.', 1, 1, '2022-02-04 09:29:31', '2023-07-11 15:34:10'),
 (6, 'Sample Source 123', 'Sample Source', 0, 1, '2022-02-04 09:29:42', '2022-02-04 09:29:58');
 
 -- --------------------------------------------------------
@@ -167,7 +147,7 @@ CREATE TABLE `system_info` (
   `id` int(30) NOT NULL,
   `meta_field` text NOT NULL,
   `meta_value` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `system_info`
@@ -199,7 +179,7 @@ CREATE TABLE `users` (
   `status` int(1) NOT NULL DEFAULT 1 COMMENT '0=not verified, 1 = verified',
   `date_added` datetime NOT NULL DEFAULT current_timestamp(),
   `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
@@ -207,8 +187,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `firstname`, `middlename`, `lastname`, `username`, `password`, `avatar`, `last_login`, `type`, `status`, `date_added`, `date_updated`) VALUES
 (1, 'Adminstrator', NULL, 'Admin', 'admin', '0192023a7bbd73250516f069df18b500', 'uploads/avatar-1.png?v=1643959844', NULL, 1, 1, '2021-01-20 14:02:37', '2022-02-04 15:30:44'),
-(8, 'Claire', NULL, 'Blake', 'cblake', '4744ddea876b11dcb1d169fadf494418', 'uploads/avatar-8.png?v=1643872307', NULL, 2, 1, '2022-02-03 15:11:47', '2022-02-03 15:11:47'),
-(9, 'John', NULL, 'Smith', 'jsmith', '1254737c076cf867dc53d60a0364f38e', NULL, NULL, 2, 1, '2022-02-04 14:55:58', NULL);
+(8, 'Edward ', NULL, 'Ballacillo', 'ed', '202cb962ac59075b964b07152d234b70', 'uploads/avatar-8.png?v=1643872307', NULL, 2, 1, '2022-02-03 15:11:47', '2023-07-11 15:43:27'),
+(9, 'Ogie', NULL, 'Alcasid', 'ogiegie', '202cb962ac59075b964b07152d234b70', NULL, NULL, 2, 1, '2022-02-04 14:55:58', '2023-07-11 13:52:49');
 
 --
 -- Indexes for dumped tables
