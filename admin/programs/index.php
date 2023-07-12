@@ -1,6 +1,6 @@
 <div class="card card-outline card-primary rounded-0 shadow">
 	<div class="card-header">
-		<h3 class="card-title">List of Available</h3>
+		<h3 class="card-title">List of Available </h3>
 		<?php if($_settings->userdata('type') == 1): ?>
 		<div class="card-tools">
 			<a href="javascript:void(0)" id="create_new" class="btn btn-flat btn-sm btn-primary"><span class="fas fa-plus"></span>  Add New Program</a>
@@ -78,16 +78,16 @@
 <script>
 	$(document).ready(function(){
         $('#create_new').click(function(){
-			uni_modal("Add New Source","sources/manage_source.php")
+			uni_modal("Add New program","programs/manage_program.php")
 		})
 		$('.view_data').click(function(){
-			uni_modal("Source Details","sources/view_source.php?id="+$(this).attr('data-id'))
+			uni_modal("Program Details","programs/view_program.php?id="+$(this).attr('data-id'))
 		})
         $('.edit_data').click(function(){
-			uni_modal("Update Source Details","sources/manage_source.php?id="+$(this).attr('data-id'))
+			uni_modal("Update Program Details","programs/manage_program.php?id="+$(this).attr('data-id'))
 		})
 		$('.delete_data').click(function(){
-			_conf("Are you sure to delete this Source permanently?","delete_source",[$(this).attr('data-id')])
+			_conf("Are you sure to delete this program permanently?","delete_program",[$(this).attr('data-id')])
 		})
 		$('.table td, .table th').addClass('py-1 px-2 align-middle')
 		$('.table').dataTable({
@@ -96,10 +96,10 @@
             ],
         });
 	})
-	function delete_source($id){
+	function delete_program($id){
 		start_loader();
 		$.ajax({
-			url:_base_url_+"classes/Master.php?f=delete_source",
+			url:_base_url_+"classes/Master.php?f=delete_program",
 			method:"POST",
 			data:{id: $id},
 			dataType:"json",

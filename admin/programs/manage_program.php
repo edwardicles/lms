@@ -11,19 +11,13 @@ if(isset($_GET['id'])){
     }
 }
 ?>
-<style>
-	img#cimg{
-		height: 17vh;
-		width: 25vw;
-		object-fit: scale-down;
-	}
-</style>
+
 <div class="container-fluid">
-    <form action="" id="source-form">
+    <form action="" id="program-form">
         <input type="hidden" name="id" value="<?php echo isset($id) ? $id : '' ?>">
         <div class="form-group">
             <label for="program" class="control-label">Program Name</label>
-            <input type="text" name="program" id="program" class="form-control form-control-border" placeholder="Enter source Name" value ="<?php echo isset($program) ? $program : '' ?>" required>
+            <input type="text" name="program" id="program" class="form-control form-control-border" placeholder="Enter program Name" value ="<?php echo isset($program) ? $program : '' ?>" required>
         </div>
         <div class="form-group">
             <label for="description" class="control-label">Description</label>
@@ -40,7 +34,7 @@ if(isset($_GET['id'])){
 </div>
 <script>
     $(function(){
-        $('#uni_modal #source-form').submit(function(e){
+        $('#uni_modal #program-form').submit(function(e){
             e.preventDefault();
             var _this = $(this)
             $('.pop-msg').remove()
@@ -49,7 +43,7 @@ if(isset($_GET['id'])){
                 el.hide()
             start_loader();
             $.ajax({
-                url:_base_url_+"classes/Master.php?f=save_source",
+                url:_base_url_+"classes/Master.php?f=save_program",
 				data: new FormData($(this)[0]),
                 cache: false,
                 contentType: false,
