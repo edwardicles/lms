@@ -86,7 +86,7 @@ if(isset($_GET['id'])){
                                 <legend class="text-muted h4">Lead's Information</legend>
                                 <div class="callout rounded-0 shadow">
                                     <div class="form-group">
-                                        <label for="interested_in" class="control-label">Interested In</label>
+                                        <label for="interested_in" class="control-label">Program:</label>
                                         <input type="text" name="interested_in" id="interested_in" class="form-control form-control-sm form-control-border" value ="<?php echo isset($interested_in) ? $interested_in : '' ?>" required>
                                     </div>
                                     <div class="form-group">
