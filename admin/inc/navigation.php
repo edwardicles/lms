@@ -50,7 +50,7 @@
                         </p>
                       </a>
                       <li class="nav-item dropdown">
-                      <a href="<?php echo base_url ?>admin/?page=user/list" class="nav-link nav-user_list">
+                      <a href="<?php echo base_url ?>admin/?page=programs" class="nav-link nav-program_list">
                         <i class="nav-icon fas fa-users-cog"></i>
                         <p>
                           Programs
@@ -58,10 +58,10 @@
                       </a>
                     </li>
                     <li class="nav-item dropdown">
-                      <a href="<?php echo base_url ?>admin/?page=user/list" class="nav-link nav-user_list">
+                      <a href="<?php echo base_url ?>admin/?page=courses/list" class="nav-link nav-course_list">
                         <i class="nav-icon fas fa-users-cog"></i>
                         <p>
-                          Technolgy Courses
+                          Courses
                         </p>
                       </a>
                     </li>

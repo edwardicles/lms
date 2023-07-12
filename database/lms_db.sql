@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 11, 2023 at 10:51 AM
+-- Generation Time: Jul 12, 2023 at 09:29 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -48,7 +48,32 @@ CREATE TABLE `client_list` (
 --
 
 INSERT INTO `client_list` (`id`, `lead_id`, `firstname`, `middlename`, `lastname`, `gender`, `dob`, `contact`, `email`, `address`, `other_info`, `date_created`, `date_updated`) VALUES
-(2, 4, 'Mike', '', 'Williams', 'Male', '1997-10-14', '09789546123', 'mwilliams@xyzcompany.com', 'Sample Address', '', '2022-02-04 11:40:44', NULL);
+(6, 8, 'edward james ', '', 'Enriquez', 'Male', '2004-06-12', '231243141234', 'adasdsasadas@gmail.com', 'asdasdawasdcxzcz', '', '2023-07-12 11:29:37', NULL),
+(7, 9, 'waeasdasd', 'qwdqdas', 'qwddqwdasd', 'Male', '2019-06-12', '213124124', 'admin@gmail.com', '21312312', 'Contacted', '2023-07-12 11:31:23', NULL),
+(8, 10, 'edward james ', 'adsadas', 'asdasdasd', 'Male', '2006-06-12', '231243141234', 'dasdad@gmail.com', 'sdadsdas', 'asdasd', '2023-07-12 11:41:57', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `course_list`
+--
+
+CREATE TABLE `course_list` (
+  `id` int(30) NOT NULL,
+  `course` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `delete_flag` tinyint(1) NOT NULL DEFAULT 0,
+  `date_created` datetime NOT NULL DEFAULT current_timestamp(),
+  `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `course_list`
+--
+
+INSERT INTO `course_list` (`id`, `course`, `description`, `status`, `delete_flag`, `date_created`, `date_updated`) VALUES
+(1, 'Accountancy, Business, and Management', 'ABM', 1, 0, '2023-07-12 15:28:12', NULL);
 
 -- --------------------------------------------------------
 
@@ -76,7 +101,9 @@ CREATE TABLE `lead_list` (
 --
 
 INSERT INTO `lead_list` (`id`, `code`, `source_id`, `interested_in`, `remarks`, `assigned_to`, `user_id`, `status`, `in_opportunity`, `delete_flag`, `date_created`, `date_updated`) VALUES
-(4, '202202-00002', 4, 'Something', 'Sample Only', 8, 1, 1, 0, 0, '2022-02-04 11:40:43', '2022-02-04 14:21:59');
+(8, '202307-00001', 7, 'ITP', 'sadasdas', NULL, 1, 0, 1, 0, '2023-07-12 11:29:37', NULL),
+(9, '202307-00002', 7, 'ITP', 'Contacted', NULL, NULL, 0, 0, 0, '2023-07-12 11:31:23', NULL),
+(10, '202307-00003', 8, 'ITP', 'asdasd', NULL, 1, 0, 0, 0, '2023-07-12 11:41:57', NULL);
 
 -- --------------------------------------------------------
 
@@ -112,6 +139,29 @@ CREATE TABLE `note_list` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `program_list`
+--
+
+CREATE TABLE `program_list` (
+  `id` int(30) NOT NULL,
+  `program` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `delete_flag` tinyint(1) NOT NULL DEFAULT 0,
+  `date_created` datetime NOT NULL DEFAULT current_timestamp(),
+  `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `program_list`
+--
+
+INSERT INTO `program_list` (`id`, `program`, `description`, `status`, `delete_flag`, `date_created`, `date_updated`) VALUES
+(1, 'SHS', 'Senior High School', 1, 0, '2023-07-12 15:28:50', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `source_list`
 --
 
@@ -130,12 +180,8 @@ CREATE TABLE `source_list` (
 --
 
 INSERT INTO `source_list` (`id`, `name`, `description`, `status`, `delete_flag`, `date_created`, `date_updated`) VALUES
-(1, 'Facebook Ad', 'Leads from the Facebook Advertisments.', 1, 1, '2022-02-04 09:26:11', '2023-07-11 15:34:04'),
-(2, 'Company Website', 'Leads from company website', 1, 1, '2022-02-04 09:27:47', '2023-07-11 15:34:00'),
-(3, 'Referral', 'Leads from referrals', 1, 1, '2022-02-04 09:28:23', '2023-07-11 15:34:14'),
-(4, 'Google Ads', 'Leads form Google Ads', 1, 1, '2022-02-04 09:28:54', '2023-07-11 15:34:07'),
-(5, 'Other Sources', 'Leads that are from unlisted sources.', 1, 1, '2022-02-04 09:29:31', '2023-07-11 15:34:10'),
-(6, 'Sample Source 123', 'Sample Source', 0, 1, '2022-02-04 09:29:42', '2022-02-04 09:29:58');
+(7, 'Technological Institute of the Philippines (QC)', 'TIP QC', 1, 0, '2023-07-12 11:27:42', NULL),
+(8, 'MFI JALA-JALA', '', 1, 0, '2023-07-12 11:28:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -173,7 +219,6 @@ CREATE TABLE `users` (
   `lastname` varchar(250) NOT NULL,
   `username` text NOT NULL,
   `password` text NOT NULL,
-  `avatar` text DEFAULT NULL,
   `last_login` datetime DEFAULT NULL,
   `type` tinyint(1) NOT NULL DEFAULT 0,
   `status` int(1) NOT NULL DEFAULT 1 COMMENT '0=not verified, 1 = verified',
@@ -185,10 +230,10 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `firstname`, `middlename`, `lastname`, `username`, `password`, `avatar`, `last_login`, `type`, `status`, `date_added`, `date_updated`) VALUES
-(1, 'Adminstrator', NULL, 'Admin', 'admin', '0192023a7bbd73250516f069df18b500', 'uploads/avatar-1.png?v=1643959844', NULL, 1, 1, '2021-01-20 14:02:37', '2022-02-04 15:30:44'),
-(8, 'Edward ', NULL, 'Ballacillo', 'ed', '202cb962ac59075b964b07152d234b70', 'uploads/avatar-8.png?v=1643872307', NULL, 2, 1, '2022-02-03 15:11:47', '2023-07-11 15:43:27'),
-(9, 'Ogie', NULL, 'Alcasid', 'ogiegie', '202cb962ac59075b964b07152d234b70', NULL, NULL, 2, 1, '2022-02-04 14:55:58', '2023-07-11 13:52:49');
+INSERT INTO `users` (`id`, `firstname`, `middlename`, `lastname`, `username`, `password`, `last_login`, `type`, `status`, `date_added`, `date_updated`) VALUES
+(1, 'Adminstrator', NULL, 'Admin', 'admin', '0192023a7bbd73250516f069df18b500', NULL, 1, 1, '2021-01-20 14:02:37', '2022-02-04 15:30:44'),
+(9, 'Ogie', NULL, 'Alcasid', 'ogiegie', '202cb962ac59075b964b07152d234b70', NULL, 2, 1, '2022-02-04 14:55:58', '2023-07-11 13:52:49'),
+(11, 'Edward James', NULL, 'Ballacillo', 'ejbb', '202cb962ac59075b964b07152d234b70', NULL, 2, 1, '2023-07-12 12:31:09', NULL);
 
 --
 -- Indexes for dumped tables
@@ -200,6 +245,12 @@ INSERT INTO `users` (`id`, `firstname`, `middlename`, `lastname`, `username`, `p
 ALTER TABLE `client_list`
   ADD PRIMARY KEY (`id`),
   ADD KEY `lead_id` (`lead_id`);
+
+--
+-- Indexes for table `course_list`
+--
+ALTER TABLE `course_list`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `lead_list`
@@ -227,6 +278,12 @@ ALTER TABLE `note_list`
   ADD KEY `user_id` (`user_id`);
 
 --
+-- Indexes for table `program_list`
+--
+ALTER TABLE `program_list`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `source_list`
 --
 ALTER TABLE `source_list`
@@ -252,13 +309,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `client_list`
 --
 ALTER TABLE `client_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `course_list`
+--
+ALTER TABLE `course_list`
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `lead_list`
 --
 ALTER TABLE `lead_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `log_list`
@@ -273,10 +336,16 @@ ALTER TABLE `note_list`
   MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `program_list`
+--
+ALTER TABLE `program_list`
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `source_list`
 --
 ALTER TABLE `source_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `system_info`
@@ -288,7 +357,7 @@ ALTER TABLE `system_info`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables
