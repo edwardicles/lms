@@ -106,7 +106,7 @@ if(isset($_GET['id'])){
                                         <textarea name="remarks" rows="3" id="remarks" class="form-control form-control-sm rounded-0" required><?php echo isset($remarks) ? $remarks : '' ?></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <label for="assigned_to" class="control-label">Assigned to</label>
+                                        <label for="assigned_to" class="control-label">Lead Staff</label>
                                         <select name="assigned_to" id="assigned_to" class="form-control form-control-sm form-control-border select2" >
                                             <option value="" disabled <?= !isset($assigned_to) ? 'selected' : '' ?>></option>
                                             <option value="" <?= isset($assigned_to) && $user_id == null ? 'selected' : '' ?>>Unset</option>

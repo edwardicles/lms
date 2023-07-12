@@ -37,7 +37,6 @@
   <div class="h-100 d-flex align-items-center w-100" id="login">
     <div class="col-7 h-100 d-flex align-items-center justify-content-center">
       <div class="w-100">
-        <center><img src="<?= validate_image($_settings->info('logo')) ?>" alt="" id="logo-img"></center>
         <h1 class="text-center py-5 login-title"><b><?php echo $_settings->info('name') ?></b></h1>
       </div>
       

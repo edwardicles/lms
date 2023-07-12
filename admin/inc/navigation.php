@@ -39,14 +39,7 @@
                         </p>
                       </a>
                     </li>
-                    <li class="nav-item">
-                      <a href="<?php echo base_url ?>admin/?page=opportunities" class="nav-link nav-opportunities">
-                        <i class="nav-icon fas fa-circle"></i>
-                        <p>
-                          Opportunities
-                        </p>
-                      </a>
-                    </li>
+                    
                     <?php if($_settings->userdata('type') == 1): ?>
                     <li class="nav-header">Maintenance</li>
                     <li class="nav-item dropdown">
@@ -62,14 +55,6 @@
                         <i class="nav-icon fas fa-users-cog"></i>
                         <p>
                           User List
-                        </p>
-                      </a>
-                    </li>
-                    <li class="nav-item dropdown">
-                      <a href="<?php echo base_url ?>admin/?page=system_info" class="nav-link nav-system_info">
-                        <i class="nav-icon fas fa-cogs"></i>
-                        <p>
-                          Settings
                         </p>
                       </a>
                     </li>
