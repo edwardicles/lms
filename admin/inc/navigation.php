@@ -49,6 +49,22 @@
                          Source List
                         </p>
                       </a>
+                      <li class="nav-item dropdown">
+                      <a href="<?php echo base_url ?>admin/?page=user/list" class="nav-link nav-user_list">
+                        <i class="nav-icon fas fa-users-cog"></i>
+                        <p>
+                          Programs
+                        </p>
+                      </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a href="<?php echo base_url ?>admin/?page=user/list" class="nav-link nav-user_list">
+                        <i class="nav-icon fas fa-users-cog"></i>
+                        <p>
+                          Technolgy Courses
+                        </p>
+                      </a>
+                    </li>
                     </li>
                     <li class="nav-item dropdown">
                       <a href="<?php echo base_url ?>admin/?page=user/list" class="nav-link nav-user_list">
