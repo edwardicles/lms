@@ -92,7 +92,7 @@ Class Master extends DBConnection {
 		}else{
 			$sql = "UPDATE `program_list` set {$data} where id = '{$id}' ";
 		}
-		$check = $this->conn->query("SELECT * FROM `program_list` where `name` = '{$program}' ".(is_numeric($id) && $id > 0 ? " and id != '{$id}'" : "")." ")->num_rows;
+		$check = $this->conn->query("SELECT * FROM `program_list` where `program` = '{$program}' ".(is_numeric($id) && $id > 0 ? " and id != '{$id}'" : "")." ")->num_rows;
 		if($check > 0){
 			$resp['status'] = 'failed';
 			$resp['msg'] = ' Program Name already exists.';
