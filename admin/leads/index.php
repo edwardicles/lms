@@ -43,7 +43,7 @@
 				$uwhere = " and assigned_to = '{$_settings->userdata('id')}' ";
 				$users = $conn->query("SELECT id,CONCAT(lastname,', ', firstname, '', COALESCE(middlename,'')) as fullname FROM `users` where id in (SELECT `user_id` FROM `lead_list` where in_opportunity = 0 {$uwhere}) OR id in (SELECT assigned_to FROM `lead_list` where in_opportunity = 0 {$uwhere})");
 				$user_arr = array_column($users->fetch_all(MYSQLI_ASSOC),'fullname','id');
-				$leads = $conn->query("SELECT l.*,CONCAT(c.lastname,', ', c.firstname, '', COALESCE(c.middlename,'')) as client, c.email FROM `lead_list` l inner join client_list c on c.lead_id = l.id where l.in_opportunity = 0 {$uwhere} order by l.`status` asc, unix_timestamp(l.date_created) asc ");
+				$leads = $conn->query("SELECT l.*,CONCAT(c.lastname,', ', c.firstname, '', COALESCE(c.middlename,'')) as client, c.email FROM `lead_list` l inner join client_list c on c.lead_id = l.id where l.in_opportunity >= 0 {$uwhere} order by l.`status` asc, unix_timestamp(l.date_created) asc ");
 				while($row = $leads->fetch_assoc()){
 
 					echo "<tr>";

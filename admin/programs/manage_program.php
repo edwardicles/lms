@@ -59,7 +59,7 @@ if(isset($_GET['id'])){
                 dataType: 'json',
 				error:err=>{
 					console.log(err)
-					alert_toast("An error occured",'error');
+					alert_toast("An error occured.", 'error');
 					end_loader();
 				},
                 success:function(resp){
@@ -81,4 +81,5 @@ if(isset($_GET['id'])){
             })
         })
     })
+
 </script>
