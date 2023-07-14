@@ -58,7 +58,7 @@
                       </a>
                     </li>
                     <li class="nav-item dropdown">
-                      <a href="<?php echo base_url ?>admin/?page=courses/list" class="nav-link nav-course_list">
+                      <a href="<?php echo base_url ?>admin/?page=courses" class="nav-link nav-course_list">
                         <i class="nav-icon fas fa-users-cog"></i>
                         <p>
                           Courses

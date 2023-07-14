@@ -1,9 +1,9 @@
 <div class="card card-outline card-primary rounded-0 shadow">
 	<div class="card-header">
-		<h3 class="card-title">List of Available Programs </h3>
+		<h3 class="card-title">List of Available Courses </h3>
 		<?php if($_settings->userdata('type') == 1): ?>
 		<div class="card-tools">
-			<a href="javascript:void(0)" id="create_new" class="btn btn-flat btn-sm btn-primary"><span class="fas fa-plus"></span>  Add New Program</a>
+			<a href="javascript:void(0)" id="create_new" class="btn btn-flat btn-sm btn-primary"><span class="fas fa-plus"></span>  Add New Course</a>
 		</div>
 		<?php endif; ?>
 	</div>
@@ -23,7 +23,7 @@
 					<tr class="bg-gradient-primary text-light">
 						<th>#</th>
 						<th>Date Created</th>
-						<th>Program Name</th>
+						<th>Course Name</th>
 						<th>Description</th>
 						<th>Status</th>
 						<th>Action</th>
@@ -32,13 +32,13 @@
 				<tbody>
 					<?php 
 						$i = 1;
-						$qry = $conn->query("SELECT * from `program_list` where delete_flag = 0 order by `program` asc ");
+						$qry = $conn->query("SELECT * from `course_list` where delete_flag = 0 order by `course` asc ");
 						while($row = $qry->fetch_assoc()):
 					?>
 						<tr>
 							<td class="text-center"><?php echo $i++; ?></td>
 							<td class=""><?php echo date("Y-m-d H:i",strtotime($row['date_created'])) ?></td>
-							<td class=""><p class="m-0 truncate-1"><?php echo $row['program'] ?></p></td>
+							<td class=""><p class="m-0 truncate-1"><?php echo $row['course'] ?></p></td>
 							<td class=""><p class="m-0 truncate-1"><?php echo $row['description'] ?></p></td>
 							<td class="text-center">
 								<?php 
@@ -78,16 +78,16 @@
 <script>
 	$(document).ready(function(){
         $('#create_new').click(function(){
-			uni_modal("Add New Program","programs/manage_program.php")
+			uni_modal("Add New Course","courses/manage_courses.php")
 		})
 		$('.view_data').click(function(){
-			uni_modal("Program Details","programs/view_programs.php?id="+$(this).attr('data-id'))
+			uni_modal("Course Details","courses/view_courses.php?id="+$(this).attr('data-id'))
 		})
         $('.edit_data').click(function(){
-			uni_modal("Update Program Details","programs/manage_program.php?id="+$(this).attr('data-id'))
+			uni_modal("Update Course Details","courses/manage_courses.php?id="+$(this).attr('data-id'))
 		})
 		$('.delete_data').click(function(){
-			_conf("Are you sure to delete this program permanently?","delete_program",[$(this).attr('data-id')])
+			_conf("Are you sure to delete this course permanently?","delete_course",[$(this).attr('data-id')])
 		})
 		$('.table td, .table th').addClass('py-1 px-2 align-middle')
 		$('.table').dataTable({
@@ -96,10 +96,10 @@
             ],
         });
 	})
-	function delete_program($id){
+	function delete_course($id){
 		start_loader();
 		$.ajax({
-			url:_base_url_+"classes/Master.php?f=delete_program",
+			url:_base_url_+"classes/Master.php?f=delete_course",
 			method:"POST",
 			data:{id: $id},
 			dataType:"json",

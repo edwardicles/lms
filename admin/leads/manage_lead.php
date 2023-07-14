@@ -86,15 +86,35 @@ if(isset($_GET['id'])){
                                 <legend class="text-muted h4">Lead's Information</legend>
                                 <div class="callout rounded-0 shadow">
                                     <div class="form-group">
-                                        <label for="interested_in" class="control-label">Program:</label>
-                                        <input type="text" name="interested_in" id="interested_in" class="form-control form-control-sm form-control-border" value ="<?php echo isset($interested_in) ? $interested_in : '' ?>" required>
+                                        <label for="program_id" class="control-label">Program:</label>
+                                        <select name="program_id" id="program_id" class="form-control form-control-sm form-control-border select2" required>
+                                            <option value="" disabled <?= !isset($program_id) ? 'selected' : '' ?>></option>
+                                            <?php 
+                                            $prog = $conn->query("SELECT * FROM `program_list` where `status` = 1 ".(isset($program_id)? " or id = '{$program_id}'" : "")." order by `program` asc ");
+                                            while($row = $prog->fetch_assoc()):
+                                            ?>
+                                            <option value="<?= $row['id'] ?>" <?= isset($program_id) && $program_id == $row['id'] ? 'selected' : '' ?>><?= $row['program'] ?></option>
+                                            <?php endwhile; ?>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="course_id" class="control-label">Course:</label>
+                                        <select name="course_id" id="course_id" class="form-control form-control-sm form-control-border select2" required>
+                                            <option value="" disabled <?= !isset($course_id) ? 'selected' : '' ?>></option>
+                                            <?php 
+                                            $cor = $conn->query("SELECT * FROM `course_list` where `status` = 1 ".(isset($course_id)? " or id = '{$course_id}'" : "")." order by `course` asc ");
+                                            while($row = $cor->fetch_assoc()):
+                                            ?>
+                                            <option value="<?= $row['id'] ?>" <?= isset($course_id) && $course_id == $row['id'] ? 'selected' : '' ?>><?= $row['course'] ?></option>
+                                            <?php endwhile; ?>
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="source_id" class="control-label">Lead School</label>
                                         <select name="source_id" id="source_id" class="form-control form-control-sm form-control-border select2" required>
                                             <option value="" disabled <?= !isset($source_id) ? 'selected' : '' ?>></option>
                                             <?php 
-                                            $source = $conn->query("SELECT * FROM `source_list` where delete_flag = 0 and `status` = 1 ".(isset($source_id)? " or id = '{$source_id}'" : "")." order by `name` asc ");
+                                            $source = $conn->query("SELECT * FROM `source_list` where `status` = 1 ".(isset($source_id)? " or id = '{$source_id}'" : "")." order by `name` asc ");
                                             while($row = $source->fetch_assoc()):
                                             ?>
                                             <option value="<?= $row['id'] ?>" <?= isset($source_id) && $source_id == $row['id'] ? 'selected' : '' ?>><?= $row['name'] ?></option>
@@ -118,23 +138,26 @@ if(isset($_GET['id'])){
                                             <?php endwhile; ?>
                                         </select>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="status" class="control-label">Status</label>
-                                        <select name="status" id="status" class="form-control form-control-sm form-control-border select2" required>
-                                            <option value="0" <?= isset($status) && $status == 0 ? 'selected' : '' ?>>New/Prospect</option>
-                                            <option value="1" <?= isset($status) && $status == 1 ? 'selected' : '' ?>>Open</option>
-                                            <option value="2" <?= isset($status) && $status == 2 ? 'selected' : '' ?>>Working</option>
-                                            <option value="3" <?= isset($status) && $status == 3 ? 'selected' : '' ?>>Not a Target</option>
-                                            <option value="4" <?= isset($status) && $status == 4 ? 'selected' : '' ?>>Disqualified</option>
-                                            <option value="5" <?= isset($status) && $status == 5 ? 'selected' : '' ?>>Nurture</option>
-                                            <?php if(isset($status) && $status == 6): ?>
-                                            <option value="6" <?= isset($status) && $status == 6 ? 'selected' : '' ?>>Opportunity Created</option>
-                                            <?php endif; ?>
-                                            <option value="7" <?= isset($status) && $status == 7 ? 'selected' : '' ?>>Opportunity Lost</option>
-                                            <option value="8" <?= isset($status) && $status == 8 ? 'selected' : '' ?>>Inactive</option>
-                                        </select>
+                                    <div id="wrapper" required>
+                                    <label for="yes_no_radio">Enrolled?</label>
+                                    <p>
+                                    <input type="radio" name="yes_no" checked>Yes</input>
+                                    </p>
+                                    <p>
+                                    <input type="radio" name="yes_no">No</input>
+                                    </p>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                        <label for="status" class="control-label">How do you discover MFI?</label>
+                                        <select name="status" id="status" class="form-control form-control-sm form-control-border select2" required>
+                                            <option value="0" <?= isset($status) && $status == 0 ? 'selected' : '' ?>>Social Media</option>
+                                            <option value="1" <?= isset($status) && $status == 1 ? 'selected' : '' ?>>Printed Ads</option>
+                                            <option value="2" <?= isset($status) && $status == 2 ? 'selected' : '' ?>>Referred by a friend</option>
+                                            <option value="3" <?= isset($status) && $status == 3 ? 'selected' : '' ?>>Relatives</option>
+                                            <option value="4" <?= isset($status) && $status == 4 ? 'selected' : '' ?>>Walk-in</option>
+                                        </select>
+                                    </div>
                             </fieldset>
                         </div>
                     </div>

@@ -64,7 +64,7 @@ Class Master extends DBConnection {
 	}
 	function delete_source(){
 		extract($_POST);
-		$del = $this->conn->query("UPDATE `source_list` set delete_flag = 1 where id = '{$id}'");
+		$del = $this->conn->query("DELETE FROM `source_list` WHERE id = '{$id}'");
 		if($del){
 			$resp['status'] = 'success';
 			$this->settings->set_flashdata('success'," Source has been deleted successfully.");
@@ -75,10 +75,10 @@ Class Master extends DBConnection {
 		return json_encode($resp);
 	}
 
-<<<<<<< HEAD
-=======
 	/* Program List */
-	function save_program(){
+	
+
+	function program_save(){
 		extract($_POST);
 		$data = "";
 		foreach($_POST as $k =>$v){
@@ -121,7 +121,7 @@ Class Master extends DBConnection {
 	}
 	function delete_program(){
 		extract($_POST);
-		$del = $this->conn->query("UPDATE `program_list` set delete_flag = 1 where id = '{$id}'");
+		$del = $this->conn->query("DELETE FROM `program_list` WHERE id = '{$id}'");
 		if($del){
 			$resp['status'] = 'success';
 			$this->settings->set_flashdata('success'," Program has been deleted successfully.");
@@ -131,9 +131,62 @@ Class Master extends DBConnection {
 		}
 		return json_encode($resp);
 	}
->>>>>>> f5f158caef2959ff0cfc0f5d24668353f46d75d2
 
-
+/* Courses */
+function course_save(){
+	extract($_POST);
+	$data = "";
+	foreach($_POST as $k =>$v){
+		if(!in_array($k,array('id'))){
+			if(!is_numeric($v))
+				$v = $this->conn->real_escape_string($v);
+			if(!empty($data)) $data .=",";
+			$data .= " `{$k}`='{$this->conn->real_escape_string($v)}' ";
+		}
+	}
+	if(empty($id)){
+		$sql = "INSERT INTO `course_list` set {$data} ";
+	}else{
+		$sql = "UPDATE `course_list` set {$data} where id = '{$id}' ";
+	}
+	$check = $this->conn->query("SELECT * FROM `course_list` where `course` = '{$course}' ".(is_numeric($id) && $id > 0 ? " and id != '{$id}'" : "")." ")->num_rows;
+	if($check > 0){
+		$resp['status'] = 'failed';
+		$resp['msg'] = ' Course Name already exists.';
+		
+	}else{
+		$save = $this->conn->query($sql);
+		if($save){
+			$rid = !empty($id) ? $id : $this->conn->insert_id;
+			$resp['id'] = $rid;
+			$resp['status'] = 'success';
+			if(empty($id))
+				$resp['msg'] = " Course has successfully added.";
+			else
+				$resp['msg'] = " Course details has been updated successfully.";
+		}else{
+			$resp['status'] = 'failed';
+			$resp['msg'] = "An error occured.";
+			$resp['err'] = $this->conn->error."[{$sql}]";
+		}
+	}
+	if($resp['status'] =='success')
+		$this->settings->set_flashdata('success',$resp['msg']);
+	return json_encode($resp);
+}
+function delete_course(){
+	extract($_POST);
+	$del = $this->conn->query("DELETE FROM `course_list` WHERE id = '{$id}'");
+	/*UPDATE  `course_list` set delete_flag = 1 where id = '{$id}' */
+	if($del){
+		$resp['status'] = 'success';
+		$this->settings->set_flashdata('success',"Course has been deleted successfully.");
+	}else{
+		$resp['status'] = 'failed';
+		$resp['error'] = $this->conn->error;
+	}
+	return json_encode($resp);
+}
 
 
 
@@ -287,7 +340,7 @@ Class Master extends DBConnection {
 	}
 	function delete_log(){
 		extract($_POST);
-		$del = $this->conn->query("DELETE FROM `log_list` where id = '{$id}'");
+		$del = $this->conn->query("DELETE FROM `log_list` WHERE id = '{$id}'");
 		if($del){
 			$resp['status'] = 'success';
 			$this->settings->set_flashdata('success'," Log has been deleted successfully.");
@@ -340,7 +393,7 @@ Class Master extends DBConnection {
 	}
 	function delete_note(){
 		extract($_POST);
-		$del = $this->conn->query("DELETE FROM `note_list` where id = '{$id}'");
+		$del = $this->conn->query("DELETE FROM `note_list` WHERE id = '{$id}'");
 		if($del){
 			$resp['status'] = 'success';
 			$this->settings->set_flashdata('success'," Note has been deleted successfully.");
@@ -375,6 +428,18 @@ switch ($action) {
 	break;
 	case 'delete_source':
 		echo $Master->delete_source();
+	break;
+	case 'program_save':
+		echo $Master->program_save();
+	break;
+	case 'delete_program':
+		echo $Master->delete_program();
+	break;
+	case 'course_save':
+		echo $Master->course_save();
+	break;
+	case 'delete_course':
+		echo $Master->delete_course();
 	break;
 	case 'save_lead':
 		echo $Master->save_lead();

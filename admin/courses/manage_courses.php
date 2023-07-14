@@ -1,7 +1,7 @@
 <?php
 require_once('../../config.php');
 if(isset($_GET['id'])){
-    $qry = $conn->query("SELECT * FROM `program_list` where id = '{$_GET['id']}'");
+    $qry = $conn->query("SELECT * FROM `course_list` where id = '{$_GET['id']}'");
     if($qry->num_rows > 0){
         $res = $qry->fetch_array();
         foreach($res as $k => $v){
@@ -19,11 +19,11 @@ if(isset($_GET['id'])){
 	}
 </style>
 <div class="container-fluid">
-    <form action="" id="program-form">
+    <form action="" id="course-form">
         <input type="hidden" name="id" value="<?php echo isset($id) ? $id : '' ?>">
         <div class="form-group">
-            <label for="program" class="control-label">Program Name</label>
-            <input type="text" name="program" id="program" class="form-control form-control-border" placeholder="Enter Program Name" value ="<?php echo isset($program) ? $program : '' ?>" required>
+            <label for="course" class="control-label">Course Name</label>
+            <input type="text" name="course" id="course" class="form-control form-control-border" placeholder="Enter Course Name" value ="<?php echo isset($course) ? $course : '' ?>" required>
         </div>
         <div class="form-group">
             <label for="description" class="control-label">Description</label>
@@ -40,7 +40,7 @@ if(isset($_GET['id'])){
 </div>
 <script>
     $(function(){
-        $('#uni_modal #program-form').submit(function(e){
+        $('#uni_modal #course-form').submit(function(e){
             e.preventDefault();
             var _this = $(this)
             $('.pop-msg').remove()
@@ -49,7 +49,7 @@ if(isset($_GET['id'])){
                 el.hide()
             start_loader();
             $.ajax({
-                url:_base_url_+"classes/Master.php?f=program_save",
+                url:_base_url_+"classes/Master.php?f=course_save",
 				data: new FormData($(this)[0]),
                 cache: false,
                 contentType: false,
