@@ -19,7 +19,7 @@ if(isset($_GET['id'])){
 <div class="container-fluid">
     <div class="row">
             <dl>
-                <dt class="text-muted">Program</dt>
+                <dt class="text-muted">Program:</dt>
                 <dd class='pl-4 fs-4 fw-bold'><?= isset($program) ? $program : 'N/A' ?></dd>
                 <dt class="text-muted">Description</dt>
                 <dd class='pl-4 fs-4 fw-bold'><small><?= isset($description) ? $description : 'N/A' ?></small></dd>

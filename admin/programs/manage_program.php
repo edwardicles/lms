@@ -11,13 +11,19 @@ if(isset($_GET['id'])){
     }
 }
 ?>
-
+<style>
+	img#cimg{
+		height: 17vh;
+		width: 25vw;
+		object-fit: scale-down;
+	}
+</style>
 <div class="container-fluid">
     <form action="" id="program-form">
         <input type="hidden" name="id" value="<?php echo isset($id) ? $id : '' ?>">
         <div class="form-group">
-            <label for="program" class="control-label">Program Name</label>
-            <input type="text" name="program" id="program" class="form-control form-control-border" placeholder="Enter program Name" value ="<?php echo isset($program) ? $program : '' ?>" required>
+            <label for="program" class="control-label">Source Name</label>
+            <input type="text" name="program" id="program" class="form-control form-control-border" placeholder="Enter Program Name" value ="<?php echo isset($program) ? $program : '' ?>" required>
         </div>
         <div class="form-group">
             <label for="description" class="control-label">Description</label>

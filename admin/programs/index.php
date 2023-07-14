@@ -78,10 +78,10 @@
 <script>
 	$(document).ready(function(){
         $('#create_new').click(function(){
-			uni_modal("Add New program","programs/manage_program.php")
+			uni_modal("Add New Program","programs/manage_program.php")
 		})
 		$('.view_data').click(function(){
-			uni_modal("Program Details","programs/view_program.php?id="+$(this).attr('data-id'))
+			uni_modal("Program Details","programs/view_programs.php?id="+$(this).attr('data-id'))
 		})
         $('.edit_data').click(function(){
 			uni_modal("Update Program Details","programs/manage_program.php?id="+$(this).attr('data-id'))

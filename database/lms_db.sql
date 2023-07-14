@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 12, 2023 at 09:29 AM
+-- Generation Time: Jul 12, 2023 at 12:14 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -50,7 +50,8 @@ CREATE TABLE `client_list` (
 INSERT INTO `client_list` (`id`, `lead_id`, `firstname`, `middlename`, `lastname`, `gender`, `dob`, `contact`, `email`, `address`, `other_info`, `date_created`, `date_updated`) VALUES
 (6, 8, 'edward james ', '', 'Enriquez', 'Male', '2004-06-12', '231243141234', 'adasdsasadas@gmail.com', 'asdasdawasdcxzcz', '', '2023-07-12 11:29:37', NULL),
 (7, 9, 'waeasdasd', 'qwdqdas', 'qwddqwdasd', 'Male', '2019-06-12', '213124124', 'admin@gmail.com', '21312312', 'Contacted', '2023-07-12 11:31:23', NULL),
-(8, 10, 'edward james ', 'adsadas', 'asdasdasd', 'Male', '2006-06-12', '231243141234', 'dasdad@gmail.com', 'sdadsdas', 'asdasd', '2023-07-12 11:41:57', NULL);
+(8, 10, 'edward james ', 'adsadas', 'asdasdasd', 'Male', '2006-06-12', '231243141234', 'dasdad@gmail.com', 'sdadsdas', 'asdasd', '2023-07-12 11:41:57', NULL),
+(9, 11, 'Dingdong', '', 'Dantes', 'Male', '1999-08-08', '0909090', 'asdasdaS@gmail.com', 'sadasfaf', 'asdasdas', '2023-07-12 18:13:09', NULL);
 
 -- --------------------------------------------------------
 
@@ -103,7 +104,8 @@ CREATE TABLE `lead_list` (
 INSERT INTO `lead_list` (`id`, `code`, `source_id`, `interested_in`, `remarks`, `assigned_to`, `user_id`, `status`, `in_opportunity`, `delete_flag`, `date_created`, `date_updated`) VALUES
 (8, '202307-00001', 7, 'ITP', 'sadasdas', NULL, 1, 0, 1, 0, '2023-07-12 11:29:37', NULL),
 (9, '202307-00002', 7, 'ITP', 'Contacted', NULL, NULL, 0, 0, 0, '2023-07-12 11:31:23', NULL),
-(10, '202307-00003', 8, 'ITP', 'asdasd', NULL, 1, 0, 0, 0, '2023-07-12 11:41:57', NULL);
+(10, '202307-00003', 8, 'ITP', 'asdasd', NULL, 1, 0, 0, 0, '2023-07-12 11:41:57', NULL),
+(11, '202307-00004', 8, 'SHS', 'Done', 11, 11, 0, 0, 0, '2023-07-12 18:13:09', NULL);
 
 -- --------------------------------------------------------
 
@@ -157,7 +159,8 @@ CREATE TABLE `program_list` (
 --
 
 INSERT INTO `program_list` (`id`, `program`, `description`, `status`, `delete_flag`, `date_created`, `date_updated`) VALUES
-(1, 'SHS', 'Senior High School', 1, 0, '2023-07-12 15:28:50', NULL);
+(1, 'SHS', 'Senior High School', 1, 0, '2023-07-12 15:28:50', NULL),
+(2, 'Science, Technology, Engineering and Math', 'STEM', 1, 0, '2023-07-12 18:07:34', NULL);
 
 -- --------------------------------------------------------
 
@@ -181,7 +184,9 @@ CREATE TABLE `source_list` (
 
 INSERT INTO `source_list` (`id`, `name`, `description`, `status`, `delete_flag`, `date_created`, `date_updated`) VALUES
 (7, 'Technological Institute of the Philippines (QC)', 'TIP QC', 1, 0, '2023-07-12 11:27:42', NULL),
-(8, 'MFI JALA-JALA', '', 1, 0, '2023-07-12 11:28:00', NULL);
+(8, 'MFI JALA-JALA', '', 1, 0, '2023-07-12 11:28:00', NULL),
+(10, 'MFI LAGUNA', 'MFI BRANCH', 1, 0, '2023-07-12 16:33:30', NULL),
+(11, 'MFI ORTIGAS', 'Main', 1, 0, '2023-07-12 16:51:06', NULL);
 
 -- --------------------------------------------------------
 
@@ -309,7 +314,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `client_list`
 --
 ALTER TABLE `client_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `course_list`
@@ -321,7 +326,7 @@ ALTER TABLE `course_list`
 -- AUTO_INCREMENT for table `lead_list`
 --
 ALTER TABLE `lead_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `log_list`
@@ -339,13 +344,13 @@ ALTER TABLE `note_list`
 -- AUTO_INCREMENT for table `program_list`
 --
 ALTER TABLE `program_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `source_list`
 --
 ALTER TABLE `source_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `system_info`
