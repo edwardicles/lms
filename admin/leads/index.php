@@ -23,12 +23,11 @@
 			<table class="table text-nowrap">
 			<thead>
                                         <tr>
-											<th class="border-top-0">Remarks</th>
                                             <th class="border-top-0">Reference Code</th>
-                                            <th class="border-top-0">Client</th>
+                                            <th class="border-top-0">Client Name</th>
+                                            <th class="border-top-0">Address</th>
+                                            <th class="border-top-0">Contact Number</th>
                                             <th class="border-top-0">Email</th>
-                                            <th class="border-top-0">Interesed In</th>
-                                            <th class="border-top-0">Assigned To</th>
                                             <th class="border-top-0">Status</th>
                                             <th class="border-top-0">Created By</th>
                                             <th class="border-top-0">Actions to be Taken</th>
@@ -43,16 +42,15 @@
 				$uwhere = " and assigned_to = '{$_settings->userdata('id')}' ";
 				$users = $conn->query("SELECT id,CONCAT(lastname,', ', firstname, '', COALESCE(middlename,'')) as fullname FROM `users` where id in (SELECT `user_id` FROM `lead_list` where in_opportunity >= 0 {$uwhere}) OR id in (SELECT assigned_to FROM `lead_list` where in_opportunity >= 0 {$uwhere})");
 				$user_arr = array_column($users->fetch_all(MYSQLI_ASSOC),'fullname','id');
-				$leads = $conn->query("SELECT l.*,CONCAT(c.lastname,', ', c.firstname, '', COALESCE(c.middlename,'')) as client, c.email FROM `lead_list` l inner join client_list c on c.lead_id = l.id where l.in_opportunity >= 0 {$uwhere} order by l.`status` asc, unix_timestamp(l.date_created) asc ");
+				$leads = $conn->query("SELECT l.*,CONCAT(c.lastname,', ', c.firstname, '', COALESCE(c.middlename,'')) as client, c.email, c.address, c.contact  FROM `lead_list` l inner join client_list c on c.lead_id = l.id where l.in_opportunity >= 0 {$uwhere} order by l.`status` asc, unix_timestamp(l.date_created) asc ");
 				while($row = $leads->fetch_assoc()){
 
 					echo "<tr>";
-					echo "<td>"; echo $row['remarks']; echo "</td>";//to echo out, use the columns from the db table
 					echo "<td>"; echo $row['code']; echo "</td>";
 					echo "<td>"; echo ucwords($row['client']); echo "</td>";
+					echo "<td>"; echo $row['address']; echo "</td>";
+					echo "<td>"; echo $row['contact']; echo "</td>";
 					echo "<td>"; echo $row['email']; echo "</td>";
-					echo "<td>"; echo $row['interested_in']; echo "</td>";
-					echo "<td>"; echo (isset($user_arr[$row['assigned_to']])) ? ucwords($user_arr[$row['assigned_to']]) : "Not Assigned Yet."; echo "</td>";
 					echo "<td>"; switch($row['status']){
 						case 0:
 							echo '<span class="badge badge-primary bg-gradient-primary px-3 rounded-pill">New/Prospect</span>';
