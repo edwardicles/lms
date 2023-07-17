@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 12, 2023 at 12:14 PM
+-- Generation Time: Jul 17, 2023 at 01:47 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -51,7 +51,10 @@ INSERT INTO `client_list` (`id`, `lead_id`, `firstname`, `middlename`, `lastname
 (6, 8, 'edward james ', '', 'Enriquez', 'Male', '2004-06-12', '231243141234', 'adasdsasadas@gmail.com', 'asdasdawasdcxzcz', '', '2023-07-12 11:29:37', NULL),
 (7, 9, 'waeasdasd', 'qwdqdas', 'qwddqwdasd', 'Male', '2019-06-12', '213124124', 'admin@gmail.com', '21312312', 'Contacted', '2023-07-12 11:31:23', NULL),
 (8, 10, 'edward james ', 'adsadas', 'asdasdasd', 'Male', '2006-06-12', '231243141234', 'dasdad@gmail.com', 'sdadsdas', 'asdasd', '2023-07-12 11:41:57', NULL),
-(9, 11, 'Dingdong', '', 'Dantes', 'Male', '1999-08-08', '0909090', 'asdasdaS@gmail.com', 'sadasfaf', 'asdasdas', '2023-07-12 18:13:09', NULL);
+(9, 11, 'Dingdong', '', 'Dantes', 'Male', '1999-08-08', '0909090', 'asdasdaS@gmail.com', 'sadasfaf', 'asdasdas', '2023-07-12 18:13:09', NULL),
+(10, 12, 'edward james ', 'adsadas', 'Dantes', 'Male', '2023-07-14', '0909090909', 'eddward.ballacillo000@gmail.com', 'asdasda', 'asdasdas', '2023-07-14 10:07:08', NULL),
+(11, 13, 'waeasdasd', 'adsadas', 'Enriquez', 'Male', '2023-07-14', '231243141234', 'qejbballacillo@tip.edu.ph', 'sadasdas', 'asdasdas', '2023-07-14 15:09:14', NULL),
+(12, 14, 'edward james ', 'aSSADAS', 'ASDADASD', 'Male', '2023-07-14', '0909090909', 'qejbballacillo@tip.edu.ph', 'ASDASDASD', 'ASDASD', '2023-07-14 15:29:26', NULL);
 
 -- --------------------------------------------------------
 
@@ -74,7 +77,10 @@ CREATE TABLE `course_list` (
 --
 
 INSERT INTO `course_list` (`id`, `course`, `description`, `status`, `delete_flag`, `date_created`, `date_updated`) VALUES
-(1, 'Accountancy, Business, and Management', 'ABM', 1, 0, '2023-07-12 15:28:12', NULL);
+(1, 'Accountancy, Business, and Management', 'ABM', 1, 1, '2023-07-12 15:28:12', '2023-07-14 11:47:02'),
+(2, 'stem', 'asdas', 1, 1, '2023-07-14 11:51:00', '2023-07-14 11:51:41'),
+(3, 'asdasdas', 'asdasdas', 1, 1, '2023-07-14 11:52:00', '2023-07-14 11:52:05'),
+(5, 'ABM', 'STEM', 1, 0, '2023-07-14 16:07:27', NULL);
 
 -- --------------------------------------------------------
 
@@ -90,22 +96,25 @@ CREATE TABLE `lead_list` (
   `remarks` text NOT NULL,
   `assigned_to` int(30) DEFAULT NULL,
   `user_id` int(30) DEFAULT NULL,
-  `status` tinyint(2) NOT NULL DEFAULT 0 COMMENT '0 = New/Prospect,\r\n1 = Open,\r\n2 = Working,\r\n3 = Not a Target,\r\n4 = Disqualified,\r\n5 = Nurture,\r\n6 = Opportunity Created,\r\n7 = Opportunity Lost,\r\n8 = Inactive',
-  `in_opportunity` tinyint(1) NOT NULL DEFAULT 0,
+  `status` tinyint(2) NOT NULL DEFAULT 0 COMMENT '0 = Social Media,\r\n1 = Printed Ads,\r\n2 = Referred by a friend,\r\n3 = Relatives,\r\n4 = Walk-in,\r\n',
   `delete_flag` tinyint(1) NOT NULL DEFAULT 0,
   `date_created` datetime NOT NULL DEFAULT current_timestamp(),
-  `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp()
+  `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp(),
+  `in_opportunity` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `lead_list`
 --
 
-INSERT INTO `lead_list` (`id`, `code`, `source_id`, `interested_in`, `remarks`, `assigned_to`, `user_id`, `status`, `in_opportunity`, `delete_flag`, `date_created`, `date_updated`) VALUES
-(8, '202307-00001', 7, 'ITP', 'sadasdas', NULL, 1, 0, 1, 0, '2023-07-12 11:29:37', NULL),
-(9, '202307-00002', 7, 'ITP', 'Contacted', NULL, NULL, 0, 0, 0, '2023-07-12 11:31:23', NULL),
-(10, '202307-00003', 8, 'ITP', 'asdasd', NULL, 1, 0, 0, 0, '2023-07-12 11:41:57', NULL),
-(11, '202307-00004', 8, 'SHS', 'Done', 11, 11, 0, 0, 0, '2023-07-12 18:13:09', NULL);
+INSERT INTO `lead_list` (`id`, `code`, `source_id`, `interested_in`, `remarks`, `assigned_to`, `user_id`, `status`, `delete_flag`, `date_created`, `date_updated`, `in_opportunity`) VALUES
+(8, '202307-00001', 7, 'ITP', 'sadasdas', NULL, 1, 0, 0, '2023-07-12 11:29:37', NULL, 0),
+(9, '202307-00002', 7, 'ITP', 'Contacted', NULL, NULL, 0, 0, '2023-07-12 11:31:23', NULL, 0),
+(10, '202307-00003', 8, 'ITP', 'asdasd', NULL, 1, 0, 0, '2023-07-12 11:41:57', NULL, 0),
+(11, '202307-00004', 8, 'SHS', 'Done', 11, 11, 0, 0, '2023-07-12 18:13:09', NULL, 0),
+(12, '202307-00005', 7, 'SHS', 'asdasdas', 9, 11, 4, 0, '2023-07-14 10:07:08', NULL, 0),
+(13, '202307-00006', 7, '', 'sadasdas', 9, 1, 0, 0, '2023-07-14 15:09:14', NULL, 0),
+(14, '202307-00007', 10, '', 'SADSDASD', 9, 1, 0, 0, '2023-07-14 15:29:25', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -160,7 +169,8 @@ CREATE TABLE `program_list` (
 
 INSERT INTO `program_list` (`id`, `program`, `description`, `status`, `delete_flag`, `date_created`, `date_updated`) VALUES
 (1, 'SHS', 'Senior High School', 1, 0, '2023-07-12 15:28:50', NULL),
-(2, 'Science, Technology, Engineering and Math', 'STEM', 1, 0, '2023-07-12 18:07:34', NULL);
+(2, 'Science, Technology, Engineering and Math', 'STEM', 1, 0, '2023-07-12 18:07:34', NULL),
+(3, 'ABM', 'hehe tangina gumana nga', 1, 0, '2023-07-14 10:39:09', '2023-07-14 10:39:25');
 
 -- --------------------------------------------------------
 
@@ -314,19 +324,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `client_list`
 --
 ALTER TABLE `client_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `course_list`
 --
 ALTER TABLE `course_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `lead_list`
 --
 ALTER TABLE `lead_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `log_list`
@@ -344,7 +354,7 @@ ALTER TABLE `note_list`
 -- AUTO_INCREMENT for table `program_list`
 --
 ALTER TABLE `program_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `source_list`
