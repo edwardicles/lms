@@ -1,6 +1,8 @@
 <?php
 if(isset($_GET['id'])){
     $qry = $conn->query("SELECT l.*,s.name as `source` FROM `lead_list` l inner join source_list s on l.source_id = s.id where l.id = '{$_GET['id']}'");
+	
+	
     if($qry->num_rows > 0){
         $res = $qry->fetch_array();
         foreach($res as $k => $v){
@@ -9,8 +11,9 @@ if(isset($_GET['id'])){
         }
     }
 
-		$qry = $conn->query("SELECT l.*,s.program as `program` FROM `lead_list` l inner join program_list s on l.program_id = s.id where l.id = '{$_GET['id']}'");
-	if($qry->num_rows > 0){
+	$qry = $conn->query("SELECT a.*,q.program as `program` FROM `lead_list` a inner join program_list q on a.program_id = q.id where a.id = '{$_GET['id']}'");
+	
+    if($qry->num_rows > 0){
         $res = $qry->fetch_array();
         foreach($res as $k => $v){
             if(!is_numeric($k))
@@ -18,15 +21,14 @@ if(isset($_GET['id'])){
         }
     }
 
-	$qry = $conn->query("SELECT l.*,s.course as `course` FROM `lead_list` l inner join course_list s on l.course_id = s.id where l.id = '{$_GET['id']}'");
-	if($qry->num_rows > 0){
+	$qry = $conn->query("SELECT w.*,e.course as `course` FROM `lead_list` w inner join course_list e on w.course_id = e.id where w.id = '{$_GET['id']}'");
+    if($qry->num_rows > 0){
         $res = $qry->fetch_array();
         foreach($res as $k => $v){
             if(!is_numeric($k))
             $$k = $v;
         }
     }
-
 
 	
     if(isset($id)){

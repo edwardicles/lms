@@ -141,26 +141,26 @@ if(isset($_GET['id'])){
 
                                     <div class="form-group">
                                         <label for="enrolled" class="control-label">Enrolled?</label>
-                                        <select name="enrolled" id="enrolled" class="form-control form-control-sm form-control-border" required>
+                                        <select name="enrolled" id="enrolled" class="form-control form-control-sm form-control-border select2" required>
                                             <option <?= isset($enrolled) && $gender == 'Yes' ? 'selected' : '' ?>>Yes</option>
                                             <option <?= isset($enrolled) && $gender == 'No' ? 'selected' : '' ?>>No</option>
                                         </select>
                                     </div>
-                                                    
-                                                
-                                    </div>
-
-                                </div>
-                                <div class="form-group">
-                                        <label for="status" class="control-label">How do you discover MFI?</label>
-                                        <select name="status" id="status" class="form-control form-control-sm form-control-border select2" required>
-                                            <option value="0" <?= isset($status) && $status == 0 ? 'selected' : '' ?>>Social Media</option>
-                                            <option value="1" <?= isset($status) && $status == 1 ? 'selected' : '' ?>>Printed Ads</option>
-                                            <option value="2" <?= isset($status) && $status == 2 ? 'selected' : '' ?>>Referred by a friend</option>
-                                            <option value="3" <?= isset($status) && $status == 3 ? 'selected' : '' ?>>Relatives</option>
-                                            <option value="4" <?= isset($status) && $status == 4 ? 'selected' : '' ?>>Walk-in</option>
+                                    <div class="form-group">
+                                        <label for="discover" class="control-label">Status</label>
+                                        <select name="discover" id="discover" class="form-control form-control-sm form-control-border select2" required>
+                                            <option value="0" <?= isset($status) && $status == 0 ? 'selected' : '' ?>>Open</option>
+                                            <option value="1" <?= isset($status) && $status == 1 ? 'selected' : '' ?>>New Prospect</option>
+                                            <option value="2" <?= isset($status) && $status == 2 ? 'selected' : '' ?>>Qualified</option>
+                                            <option value="3" <?= isset($status) && $status == 3 ? 'selected' : '' ?>>Interviewed</option>
+                                            <option value="4" <?= isset($status) && $status == 4 ? 'selected' : '' ?>>Target</option>
                                         </select>
                                     </div>
+                                                    
+                                                
+
+                                </div>
+                                
                             </fieldset>
                         </div>
                     </div>

@@ -53,22 +53,22 @@
 					echo "<td>"; echo $row['email']; echo "</td>";
 					echo "<td>"; switch($row['status']){
 						case 0:
-							echo '<span class="badge badge-primary bg-gradient-primary px-3 rounded-pill">New/Prospect</span>';
+							echo '<span class="badge badge-primary bg-gradient-primary px-3 rounded-pill">Open</span>';
 							break;
 						case 1:
-							echo '<span class="badge badge-light bg-gradient-light border px-3 rounded-pill">Open</span>';
+							echo '<span class="badge badge-light bg-gradient-light border px-3 rounded-pill">New Prospect</span>';
 							break;
 						case 2:
-							echo '<span class="badge badge-primary bg-gradient-primary px-3 rounded-pill">Working</span>';
+							echo '<span class="badge badge-primary bg-gradient-primary px-3 rounded-pill">Qualified</span>';
 							break;
 						case 3:
-							echo '<span class="badge badge-danger bg-gradient-danger px-3 rounded-pill">Not a Target</span>';
+							echo '<span class="badge badge-danger bg-gradient-danger px-3 rounded-pill">Interviewed</span>';
 							break;
 						case 4:
-							echo '<span class="badge badge-danger bg-gradient-danger px-3 rounded-pill">Disqualified</span>';
+							echo '<span class="badge badge-danger bg-gradient-danger px-3 rounded-pill">Target</span>';
 							break;
 						case 5:
-							echo '<span class="badge badge-info bg-gradient-info px-3 rounded-pill">Nurture</span>';
+							echo '<span class="badge badge-info bg-gradient-info px-3 rounded-pill">Follow Up</span>';
 							break;
 						case 6:
 							echo '<span class="badge badge-success bg-gradient-success px-3 rounded-pill">Opportunity Created</span>';
