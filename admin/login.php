@@ -3,61 +3,43 @@
 <html lang="en" class="" style="height: auto;">
  <?php require_once('inc/header.php') ?>
 <body class="hold-transition ">
-  <script>
-    start_loader()
-  </script>
+
   <style>
-    html, body{
-      height:calc(100%) !important;
-      width:calc(100%) !important;
-    }
-    body{
-      background-image: url("<?php echo validate_image($_settings->info('cover')) ?>");
-      background-size:cover;
-      background-repeat:no-repeat;
-    }
-    .login-title{
-      text-shadow: 2px 2px black
-    }
-    #login{
-      flex-direction:column !important
-    }
-    #logo-img{
-        height:150px;
-        width:150px;
-        object-fit:scale-down;
-        object-position:center center;
-        border-radius:100%;
-    }
-    #login .col-7,#login .col-5{
-      width: 100% !important;
-      max-width:unset !important
-    }
+   #template-bg-3 {
+	background-image: url('../../images/template-bg-3.jpg');
+}
+
+/* Welcome page style */
+.bg-image {
+	background-image: url('../../images/welcome-page-bg.jpg');
+}
+
+@media screen and (min-width:768px) and (max-width: 980px) {
+	.card {
+		width: 50% !important;
+		display: initial;
+	}
+}
+
   </style>
-  <div class="h-100 d-flex align-items-center w-100" id="login">
-    <div class="col-7 h-100 d-flex align-items-center justify-content-center">
-      <div class="w-100">
-        <h1 class="text-center py-5 login-title"><b><?php echo $_settings->info('name') ?></b></h1>
-      </div>
       
-    </div>
-    <div class="col-5 h-100 bg-gradient">
-      <div class="d-flex w-100 h-100 justify-content-center align-items-center">
-        <div class="card col-sm-12 col-md-6 col-lg-3 card-outline card-primary rounded-0 shadow">
-          <div class="card-header rounded-0">
-            <h4 class="text-purle text-center"><b>Login</b></h4>
-          </div>
-          <div class="card-body rounded-0">
+
+    <div class="d-flex flex-column min-vh-100 justify-content-center align-items-center"
+    id="template-bg-3">
+    <div class="card mb-5 p-5  bg-dark bg-gradient text-white col-md-4">
+        <div class="card-header text-center">
+
+          <div class="card-body mt-3">
             <form id="login-frm" action="" method="post">
-              <div class="input-group mb-3">
-                <input type="text" class="form-control" autofocus name="username" placeholder="Username">
+              <div  class="input-group form-group mt-3">
+                <input type="text" class="form-control text-center p-3"  name="username" placeholder="Username">
                 <div class="input-group-append">
                   <div class="input-group-text">
                     <span class="fas fa-user"></span>
                   </div>
                 </div>
               </div>
-              <div class="input-group mb-3">
+              <div class="input-group form-group mt-3">
                 <input type="password" class="form-control" name="password" placeholder="Password">
                 <div class="input-group-append">
                   <div class="input-group-text">
@@ -69,8 +51,10 @@
                 <div class="col-8">
                 </div>
                 <!-- /.col -->
-                <div class="col-4">
-                  <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                <div class="text-center">
+                    <input type="submit" value="Login"
+                        class="btn btn-primary mt-3 w-100 p-2"
+                        name="login-btn">
                 </div>
                 <!-- /.col -->
               </div>

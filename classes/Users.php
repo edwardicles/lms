@@ -69,41 +69,7 @@ Class Users extends DBConnection {
 			
 		}
 		
-		if(isset($_FILES['img']) && $_FILES['img']['tmp_name'] != ''){
-			$fname = 'uploads/avatar-'.$id.'.png';
-			$dir_path =base_app. $fname;
-			$upload = $_FILES['img']['tmp_name'];
-			$type = mime_content_type($upload);
-			$allowed = array('image/png','image/jpeg');
-			if(!in_array($type,$allowed)){
-				$resp['msg'].=" But Image failed to upload due to invalid file type.";
-			}else{
-				$new_height = 200; 
-				$new_width = 200; 
 		
-				list($width, $height) = getimagesize($upload);
-				$t_image = imagecreatetruecolor($new_width, $new_height);
-				imagealphablending( $t_image, false );
-				imagesavealpha( $t_image, true );
-				$gdImg = ($type == 'image/png')? imagecreatefrompng($upload) : imagecreatefromjpeg($upload);
-				imagecopyresampled($t_image, $gdImg, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
-				if($gdImg){
-						if(is_file($dir_path))
-						unlink($dir_path);
-						$uploaded_img = imagepng($t_image,$dir_path);
-						imagedestroy($gdImg);
-						imagedestroy($t_image);
-				}else{
-				$resp['msg'].=" But Image failed to upload due to unkown reason.";
-				}
-			}
-			if(isset($uploaded_img)){
-				$this->conn->query("UPDATE users set `avatar` = CONCAT('{$fname}','?v=',unix_timestamp(CURRENT_TIMESTAMP)) where id = '{$id}' ");
-				if($id == $this->settings->userdata('id')){
-						$this->settings->set_userdata('avatar',$fname);
-				}
-			}
-		}
 		if(isset($resp['msg']))
 		$this->settings->set_flashdata('success',$resp['msg']);
 		return  $resp['status'];
