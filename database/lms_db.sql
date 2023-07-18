@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 17, 2023 at 01:47 PM
+-- Generation Time: Jul 18, 2023 at 09:00 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -38,6 +38,7 @@ CREATE TABLE `client_list` (
   `contact` text NOT NULL,
   `email` text NOT NULL,
   `address` text NOT NULL,
+  `enrolled` varchar(100) NOT NULL,
   `other_info` text DEFAULT NULL,
   `date_created` datetime NOT NULL DEFAULT current_timestamp(),
   `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp()
@@ -47,14 +48,9 @@ CREATE TABLE `client_list` (
 -- Dumping data for table `client_list`
 --
 
-INSERT INTO `client_list` (`id`, `lead_id`, `firstname`, `middlename`, `lastname`, `gender`, `dob`, `contact`, `email`, `address`, `other_info`, `date_created`, `date_updated`) VALUES
-(6, 8, 'edward james ', '', 'Enriquez', 'Male', '2004-06-12', '231243141234', 'adasdsasadas@gmail.com', 'asdasdawasdcxzcz', '', '2023-07-12 11:29:37', NULL),
-(7, 9, 'waeasdasd', 'qwdqdas', 'qwddqwdasd', 'Male', '2019-06-12', '213124124', 'admin@gmail.com', '21312312', 'Contacted', '2023-07-12 11:31:23', NULL),
-(8, 10, 'edward james ', 'adsadas', 'asdasdasd', 'Male', '2006-06-12', '231243141234', 'dasdad@gmail.com', 'sdadsdas', 'asdasd', '2023-07-12 11:41:57', NULL),
-(9, 11, 'Dingdong', '', 'Dantes', 'Male', '1999-08-08', '0909090', 'asdasdaS@gmail.com', 'sadasfaf', 'asdasdas', '2023-07-12 18:13:09', NULL),
-(10, 12, 'edward james ', 'adsadas', 'Dantes', 'Male', '2023-07-14', '0909090909', 'eddward.ballacillo000@gmail.com', 'asdasda', 'asdasdas', '2023-07-14 10:07:08', NULL),
-(11, 13, 'waeasdasd', 'adsadas', 'Enriquez', 'Male', '2023-07-14', '231243141234', 'qejbballacillo@tip.edu.ph', 'sadasdas', 'asdasdas', '2023-07-14 15:09:14', NULL),
-(12, 14, 'edward james ', 'aSSADAS', 'ASDADASD', 'Male', '2023-07-14', '0909090909', 'qejbballacillo@tip.edu.ph', 'ASDASDASD', 'ASDASD', '2023-07-14 15:29:26', NULL);
+INSERT INTO `client_list` (`id`, `lead_id`, `firstname`, `middlename`, `lastname`, `gender`, `dob`, `contact`, `email`, `address`, `enrolled`, `other_info`, `date_created`, `date_updated`) VALUES
+(18, 20, 'aaaaaaaaaaaaaaaa', 'sssssssssssssss', 'ddddddddddddd', 'Male', '2023-07-18', '12321312312', 'sadsdasd@gmail.com', 'wewqewq', '', 'wqeqwewqe', '2023-07-18 12:10:25', NULL),
+(19, 21, 'qqqqqqqqq', 'wwwwwwwwwwww', 'eeeeeeeee', 'Male', '2023-07-18', '0909090909', 'asdasdaS@gmail.com', 'asdasdasdas', 'Yes', 'sdaasdasd', '2023-07-18 12:19:07', '2023-07-18 13:39:45');
 
 -- --------------------------------------------------------
 
@@ -92,11 +88,15 @@ CREATE TABLE `lead_list` (
   `id` int(30) NOT NULL,
   `code` varchar(100) NOT NULL,
   `source_id` int(30) NOT NULL,
+  `program_id` int(30) NOT NULL,
+  `course_id` int(30) NOT NULL,
   `interested_in` text NOT NULL,
   `remarks` text NOT NULL,
   `assigned_to` int(30) DEFAULT NULL,
   `user_id` int(30) DEFAULT NULL,
   `status` tinyint(2) NOT NULL DEFAULT 0 COMMENT '0 = Social Media,\r\n1 = Printed Ads,\r\n2 = Referred by a friend,\r\n3 = Relatives,\r\n4 = Walk-in,\r\n',
+  `program` text NOT NULL,
+  `course` text NOT NULL,
   `delete_flag` tinyint(1) NOT NULL DEFAULT 0,
   `date_created` datetime NOT NULL DEFAULT current_timestamp(),
   `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp(),
@@ -107,14 +107,9 @@ CREATE TABLE `lead_list` (
 -- Dumping data for table `lead_list`
 --
 
-INSERT INTO `lead_list` (`id`, `code`, `source_id`, `interested_in`, `remarks`, `assigned_to`, `user_id`, `status`, `delete_flag`, `date_created`, `date_updated`, `in_opportunity`) VALUES
-(8, '202307-00001', 7, 'ITP', 'sadasdas', NULL, 1, 0, 0, '2023-07-12 11:29:37', NULL, 0),
-(9, '202307-00002', 7, 'ITP', 'Contacted', NULL, NULL, 0, 0, '2023-07-12 11:31:23', NULL, 0),
-(10, '202307-00003', 8, 'ITP', 'asdasd', NULL, 1, 0, 0, '2023-07-12 11:41:57', NULL, 0),
-(11, '202307-00004', 8, 'SHS', 'Done', 11, 11, 0, 0, '2023-07-12 18:13:09', NULL, 0),
-(12, '202307-00005', 7, 'SHS', 'asdasdas', 9, 11, 4, 0, '2023-07-14 10:07:08', NULL, 0),
-(13, '202307-00006', 7, '', 'sadasdas', 9, 1, 0, 0, '2023-07-14 15:09:14', NULL, 0),
-(14, '202307-00007', 10, '', 'SADSDASD', 9, 1, 0, 0, '2023-07-14 15:29:25', NULL, 0);
+INSERT INTO `lead_list` (`id`, `code`, `source_id`, `program_id`, `course_id`, `interested_in`, `remarks`, `assigned_to`, `user_id`, `status`, `program`, `course`, `delete_flag`, `date_created`, `date_updated`, `in_opportunity`) VALUES
+(20, '202307-00013', 7, 0, 0, '', 'wqeqwe', 11, 1, 0, '', '', 0, '2023-07-18 12:10:25', NULL, 0),
+(21, '202307-00001', 10, 0, 0, '', 'sdadasd', 11, 1, 1, '', '', 0, '2023-07-18 12:19:07', '2023-07-18 13:16:12', 0);
 
 -- --------------------------------------------------------
 
@@ -274,7 +269,9 @@ ALTER TABLE `lead_list`
   ADD PRIMARY KEY (`id`),
   ADD KEY `source_id` (`source_id`),
   ADD KEY `assigned_to` (`assigned_to`),
-  ADD KEY `user_id` (`user_id`);
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `program_id` (`program_id`),
+  ADD KEY `course_id` (`course_id`);
 
 --
 -- Indexes for table `log_list`
@@ -324,7 +321,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `client_list`
 --
 ALTER TABLE `client_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `course_list`
@@ -336,7 +333,7 @@ ALTER TABLE `course_list`
 -- AUTO_INCREMENT for table `lead_list`
 --
 ALTER TABLE `lead_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `log_list`

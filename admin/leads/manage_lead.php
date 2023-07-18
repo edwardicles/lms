@@ -102,8 +102,8 @@ if(isset($_GET['id'])){
                                         <select name="course_id" id="course_id" class="form-control form-control-sm form-control-border select2" required>
                                             <option value="" disabled <?= !isset($course_id) ? 'selected' : '' ?>></option>
                                             <?php 
-                                            $cor = $conn->query("SELECT * FROM `course_list` where `status` = 1 ".(isset($course_id)? " or id = '{$course_id}'" : "")." order by `course` asc ");
-                                            while($row = $cor->fetch_assoc()):
+                                            $course = $conn->query("SELECT * FROM `course_list` where `status` = 1 ".(isset($course_id)? " or id = '{$course_id}'" : "")." order by `course` asc ");
+                                            while($row = $course->fetch_assoc()):
                                             ?>
                                             <option value="<?= $row['id'] ?>" <?= isset($course_id) && $course_id == $row['id'] ? 'selected' : '' ?>><?= $row['course'] ?></option>
                                             <?php endwhile; ?>
@@ -138,15 +138,18 @@ if(isset($_GET['id'])){
                                             <?php endwhile; ?>
                                         </select>
                                     </div>
-                                    <div id="wrapper" required>
-                                    <label for="yes_no_radio">Enrolled?</label>
-                                    <p>
-                                    <input type="radio" name="yes_no" checked>Yes</input>
-                                    </p>
-                                    <p>
-                                    <input type="radio" name="yes_no">No</input>
-                                    </p>
+
+                                    <div class="form-group">
+                                        <label for="enrolled" class="control-label">Enrolled?</label>
+                                        <select name="enrolled" id="enrolled" class="form-control form-control-sm form-control-border" required>
+                                            <option <?= isset($enrolled) && $gender == 'Yes' ? 'selected' : '' ?>>Yes</option>
+                                            <option <?= isset($enrolled) && $gender == 'No' ? 'selected' : '' ?>>No</option>
+                                        </select>
                                     </div>
+                                                    
+                                                
+                                    </div>
+
                                 </div>
                                 <div class="form-group">
                                         <label for="status" class="control-label">How do you discover MFI?</label>

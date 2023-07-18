@@ -208,9 +208,10 @@ function delete_course(){
 			}
 			$_POST['code'] = $prefix.$code;
 			$_POST['user_id'] = $this->settings->userdata('id');
+
 		}
-		$lead_allowed_field = ['code', 'source_id', 'interested_in', 'remarks', 'assigned_to', 'user_id', 'status', 'in_opportunity', 'delete_flag', 'date_updated'];
-		$client_allowed_field = ['lead_id', 'firstname', 'middlename', 'lastname', 'gender', 'dob', 'contact', 'email', 'address', 'other_info'];
+		$lead_allowed_field = ['code', 'source_id', 'remarks', 'assigned_to', 'user_id', 'status', 'course' , 'program', 'in_opportunity', 'delete_flag', 'date_updated'];
+		$client_allowed_field = ['lead_id', 'firstname', 'middlename', 'lastname', 'gender', 'dob', 'contact', 'email', 'address', 'other_info' , 'enrolled' ];
 		extract($_POST);
 		$data = "";
 		foreach($_POST as $k =>$v){

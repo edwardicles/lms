@@ -17,9 +17,14 @@
         <div class="col-8 border"><?= isset($address) ? $address : "" ?></div>
         <div class="col-4 border"><b>Other Information</b></div>
         <div class="col-8 border"><?= isset($other_info) ? $other_info : "" ?></div>
+        <div class="col-4 border"><b>Enrolled</b></div>
+        <div class="col-8 border"><?= isset($enrolled) ? $enrolled : "" ?></div>
+        
         <div class="col-12 border text-center"><b>Client Information</b></div>
-        <div class="col-4 border"><b>Instersted In</b></div>
-        <div class="col-8 border"><?= isset($interested_in) ? $interested_in : "" ?></div>
+        <div class="col-4 border"><b>Program</b></div>
+        <div class="col-8 border"><?= isset($program) ? $program : "" ?></div>
+        <div class="col-4 border"><b>Course</b></div>
+        <div class="col-8 border"><?= isset($course) ? $course : "" ?></div>
         <div class="col-4 border"><b>Lead Source</b></div>
         <div class="col-8 border"><?= isset($source) ? $source : "" ?></div>
         <div class="col-4 border"><b>Assigned To</b></div>

@@ -8,6 +8,27 @@ if(isset($_GET['id'])){
             $$k = $v;
         }
     }
+
+		$qry = $conn->query("SELECT l.*,s.program as `program` FROM `lead_list` l inner join program_list s on l.program_id = s.id where l.id = '{$_GET['id']}'");
+	if($qry->num_rows > 0){
+        $res = $qry->fetch_array();
+        foreach($res as $k => $v){
+            if(!is_numeric($k))
+            $$k = $v;
+        }
+    }
+
+	$qry = $conn->query("SELECT l.*,s.course as `course` FROM `lead_list` l inner join course_list s on l.course_id = s.id where l.id = '{$_GET['id']}'");
+	if($qry->num_rows > 0){
+        $res = $qry->fetch_array();
+        foreach($res as $k => $v){
+            if(!is_numeric($k))
+            $$k = $v;
+        }
+    }
+
+
+	
     if(isset($id)){
     $client_qry = $conn->query("SELECT *,CONCAT(lastname,', ', firstname,' ', COALESCE(middlename,'')) as fullname FROM `client_list` where lead_id = '{$id}' ");
     if($client_qry->num_rows > 0){
@@ -37,11 +58,6 @@ $view = isset($_GET['view']) ? $_GET['view'] : 'info';
 	<div class="card card-outline card-navy">
 		<div class="card-header">
 			<h4 class="card-title">Lead Ref. Code - <?= isset($code) ? $code : '' ?></h4>
-			<div class="card-tools">
-				<?php if(isset($in_opportunity) && $in_opportunity != 1): ?>
-					<button class="btn btn-success btn-flat btn-sm" id="move_to_opportunity"><i class="fa fa-move"></i> Move to Opportunity</button>
-				<?php endif; ?>
-			</div>
 		</div>
 		<div class="card-body">
 			<div class="container-fluid">
@@ -50,12 +66,6 @@ $view = isset($_GET['view']) ? $_GET['view'] : 'info';
 						<div class="list-group">
 							<a href="./?page=view_lead&id=<?= isset($id) ? $id : '' ?>" class="text-decoration-none text-reset list-group-item list-group-item-action <?= $view == 'info' ? 'active' : '' ?>">
 								<i class="nav-icon fa fa-info-circle"></i> Information
-							</a>
-							<a href="./?page=view_lead&view=logs&id=<?= isset($id) ? $id : '' ?>" class="text-decoration-none text-reset list-group-item list-group-item-action <?= $view == 'logs' ? 'active' : '' ?>">
-								<i class="nav-icon fa fa-phone"></i> Call Logs
-							</a>
-							<a href="./?page=view_lead&view=notes&id=<?= isset($id) ? $id : '' ?>" class="text-decoration-none text-reset list-group-item list-group-item-action <?= $view == 'notes' ? 'active' : '' ?>">
-								<i class="nav-icon fa fa-sticky-note"></i> Note
 							</a>
 						</div>
 					</div>
@@ -68,11 +78,6 @@ $view = isset($_GET['view']) ? $_GET['view'] : 'info';
 	</div>
 </div>
 <script>
-	$(function(){
-		$('#move_to_opportunity').click(function(){
-			_conf("Are you sure to create opportunity for this lead?","update_status",[])
-		})
-	})
 	function update_status(){
 		start_loader();
 		$.ajax({
