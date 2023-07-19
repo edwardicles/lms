@@ -54,7 +54,7 @@
             <span class="info-box-icon bg-gradient-primary elevation-1"><i class="fas fa-users-cog"></i></span>
 
             <div class="info-box-content">
-            <span class="info-box-text">Sysetm Users</span>
+            <span class="info-box-text">Encoder Users</span>
             <span class="info-box-number text-right">
                 <?php 
                     echo $conn->query("SELECT * FROM `users` ")->num_rows;

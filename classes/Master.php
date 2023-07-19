@@ -408,6 +408,7 @@ function delete_course(){
 		extract($_POST);
 		$in_opportunity = $status == 6 || $in_opportunity == 1 ? 1 :0;
 		$update = $this->conn->query("UPDATE `lead_list` set status = '{$status}', in_opportunity = '{$in_opportunity}' where id = '{$id}'");
+		$update = $this->conn->query("INSERT `lead_list` set status = '{$status}', in_opportunity = '{$in_opportunity}' where id = '{$id}'");
 		if($update){
 			$resp['status'] = 'success';
 			$this->settings->set_flashdata('success'," Lead's Status has been updated successfully.");
