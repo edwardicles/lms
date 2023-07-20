@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 18, 2023 at 09:00 AM
+-- Generation Time: Jul 20, 2023 at 05:11 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -49,8 +49,8 @@ CREATE TABLE `client_list` (
 --
 
 INSERT INTO `client_list` (`id`, `lead_id`, `firstname`, `middlename`, `lastname`, `gender`, `dob`, `contact`, `email`, `address`, `enrolled`, `other_info`, `date_created`, `date_updated`) VALUES
-(18, 20, 'aaaaaaaaaaaaaaaa', 'sssssssssssssss', 'ddddddddddddd', 'Male', '2023-07-18', '12321312312', 'sadsdasd@gmail.com', 'wewqewq', '', 'wqeqwewqe', '2023-07-18 12:10:25', NULL),
-(19, 21, 'qqqqqqqqq', 'wwwwwwwwwwww', 'eeeeeeeee', 'Male', '2023-07-18', '0909090909', 'asdasdaS@gmail.com', 'asdasdasdas', 'Yes', 'sdaasdasd', '2023-07-18 12:19:07', '2023-07-18 13:39:45');
+(18, 20, 'aaaaaaaaaaaaaaaa', 'sssssssssssssss', 'ddddddddddddd', 'Male', '2023-07-18', '12321312312', 'sadsdasd@gmail.com', 'wewqewq', 'Yes', 'wqeqwewqe', '2023-07-18 12:10:25', '2023-07-18 16:01:01'),
+(19, 21, 'qqqqqqqqq', 'wwwwwwwwwwww', 'eeeeeeeee', 'Male', '2023-07-18', '0909090909', 'asdasdaS@gmail.com', 'asdasdasdas', 'No', 'sdaasdasd', '2023-07-18 12:19:07', '2023-07-19 15:31:52');
 
 -- --------------------------------------------------------
 
@@ -94,9 +94,7 @@ CREATE TABLE `lead_list` (
   `remarks` text NOT NULL,
   `assigned_to` int(30) DEFAULT NULL,
   `user_id` int(30) DEFAULT NULL,
-  `status` tinyint(2) NOT NULL DEFAULT 0 COMMENT '0 = Social Media,\r\n1 = Printed Ads,\r\n2 = Referred by a friend,\r\n3 = Relatives,\r\n4 = Walk-in,\r\n',
-  `program` text NOT NULL,
-  `course` text NOT NULL,
+  `status` tinyint(2) NOT NULL DEFAULT 0 COMMENT '0 = Open,\r\n1 = New Prospect,\r\n2 = Qualified,\r\n3 = Interviewed,\r\n4 = Target,\r\n5 = Follow Up\r\n',
   `delete_flag` tinyint(1) NOT NULL DEFAULT 0,
   `date_created` datetime NOT NULL DEFAULT current_timestamp(),
   `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp(),
@@ -107,9 +105,9 @@ CREATE TABLE `lead_list` (
 -- Dumping data for table `lead_list`
 --
 
-INSERT INTO `lead_list` (`id`, `code`, `source_id`, `program_id`, `course_id`, `interested_in`, `remarks`, `assigned_to`, `user_id`, `status`, `program`, `course`, `delete_flag`, `date_created`, `date_updated`, `in_opportunity`) VALUES
-(20, '202307-00013', 7, 0, 0, '', 'wqeqwe', 11, 1, 0, '', '', 0, '2023-07-18 12:10:25', NULL, 0),
-(21, '202307-00001', 10, 0, 0, '', 'sdadasd', 11, 1, 1, '', '', 0, '2023-07-18 12:19:07', '2023-07-18 13:16:12', 0);
+INSERT INTO `lead_list` (`id`, `code`, `source_id`, `program_id`, `course_id`, `interested_in`, `remarks`, `assigned_to`, `user_id`, `status`, `delete_flag`, `date_created`, `date_updated`, `in_opportunity`) VALUES
+(20, '202307-00013', 7, 2, 5, '', 'wqeqwe', 11, 1, 7, 0, '2023-07-18 12:10:25', '2023-07-19 11:01:13', 0),
+(21, '202307-00001', 10, 1, 2, '', 'sdadasd', 11, 1, 1, 0, '2023-07-18 12:19:07', '2023-07-19 16:20:51', 0);
 
 -- --------------------------------------------------------
 
@@ -164,8 +162,7 @@ CREATE TABLE `program_list` (
 
 INSERT INTO `program_list` (`id`, `program`, `description`, `status`, `delete_flag`, `date_created`, `date_updated`) VALUES
 (1, 'SHS', 'Senior High School', 1, 0, '2023-07-12 15:28:50', NULL),
-(2, 'Science, Technology, Engineering and Math', 'STEM', 1, 0, '2023-07-12 18:07:34', NULL),
-(3, 'ABM', 'hehe tangina gumana nga', 1, 0, '2023-07-14 10:39:09', '2023-07-14 10:39:25');
+(2, 'Science, Technology, Engineering and Math', 'STEM', 1, 0, '2023-07-12 18:07:34', NULL);
 
 -- --------------------------------------------------------
 
@@ -243,7 +240,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `firstname`, `middlename`, `lastname`, `username`, `password`, `last_login`, `type`, `status`, `date_added`, `date_updated`) VALUES
 (1, 'Adminstrator', NULL, 'Admin', 'admin', '0192023a7bbd73250516f069df18b500', NULL, 1, 1, '2021-01-20 14:02:37', '2022-02-04 15:30:44'),
 (9, 'Ogie', NULL, 'Alcasid', 'ogiegie', '202cb962ac59075b964b07152d234b70', NULL, 2, 1, '2022-02-04 14:55:58', '2023-07-11 13:52:49'),
-(11, 'Edward James', NULL, 'Ballacillo', 'ejbb', '202cb962ac59075b964b07152d234b70', NULL, 2, 1, '2023-07-12 12:31:09', NULL);
+(11, 'Edward James', NULL, 'Ballacillo', 'ejbb', '202cb962ac59075b964b07152d234b70', NULL, 2, 1, '2023-07-12 12:31:09', NULL),
+(12, 'james', NULL, 'rides', 'jred', '202cb962ac59075b964b07152d234b70', NULL, 2, 1, '2023-07-19 10:46:02', NULL);
 
 --
 -- Indexes for dumped tables
@@ -369,7 +367,7 @@ ALTER TABLE `system_info`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
