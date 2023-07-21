@@ -30,6 +30,28 @@ if(isset($_GET['id'])){
         }
     }
 
+
+	
+
+	$qry = $conn->query("SELECT c.*,b.status as `status` FROM `lead_list` c inner join lead_list_ver b on c.status_id = b.id where c.id = '{$_GET['id']}'");
+    if($qry->num_rows > 0){
+        $res = $qry->fetch_array();
+        foreach($res as $k => $v){
+            if(!is_numeric($k))
+            $$k = $v;
+        }
+    }
+
+	$qry = $conn->query("SELECT n.*,m.date_updated as `date_updated` FROM `lead_list` n inner join lead_list_ver m on n.updated_id = m.id where n.id = '{$_GET['id']}'");
+    if($qry->num_rows > 0){
+        $res = $qry->fetch_array();
+        foreach($res as $k => $v){
+            if(!is_numeric($k))
+            $$k = $v;
+        }
+    }
+
+
 	
     if(isset($id)){
     $client_qry = $conn->query("SELECT *,CONCAT(lastname,', ', firstname,' ', COALESCE(middlename,'')) as fullname FROM `client_list` where lead_id = '{$id}' ");

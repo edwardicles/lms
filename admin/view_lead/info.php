@@ -79,10 +79,9 @@
             </span>
         </div>
     </div>
-    <div class="col-12 border text-center"><b>History</b></div>   
-    <div class="col-4 border"><b>Last Update</b></div>
-    <div class="col-8 border"><?= isset($update_history) ? date("M d, Y h:i A",strtotime($dupdate_history)) : "" ?> </div>
 
+                         
+                
 </div>
 <script>
     $(function(){

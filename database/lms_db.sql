@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 20, 2023 at 05:28 AM
+-- Generation Time: Jul 21, 2023 at 09:02 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -49,8 +49,9 @@ CREATE TABLE `client_list` (
 --
 
 INSERT INTO `client_list` (`id`, `lead_id`, `firstname`, `middlename`, `lastname`, `gender`, `dob`, `contact`, `email`, `address`, `enrolled`, `other_info`, `date_created`, `date_updated`) VALUES
-(18, 20, 'aaaaaaaaaaaaaaaa', 'sssssssssssssss', 'ddddddddddddd', 'Male', '2023-07-18', '12321312312', 'sadsdasd@gmail.com', 'wewqewq', 'Yes', 'wqeqwewqe', '2023-07-18 12:10:25', '2023-07-18 16:01:01'),
-(19, 21, 'qqqqqqqqq', 'wwwwwwwwwwww', 'eeeeeeeee', 'Male', '2023-07-18', '0909090909', 'asdasdaS@gmail.com', 'asdasdasdas', 'No', 'sdaasdasd', '2023-07-18 12:19:07', '2023-07-19 15:31:52');
+(24, 26, 'zzzz', 'zzxcxzc', 'asdasdasd', 'Male', '2023-07-20', '231243141234', 'hykeem.symere@gmail.com', 'zxc', 'Yes', 'zxc', '2023-07-20 17:01:04', NULL),
+(25, 27, 'qqq', 'qqq', 'qqq', 'Male', '2023-07-21', '231243141234', 'hykeem.symere@gmail.com', 'sada', 'Yes', 'asdas', '2023-07-21 11:07:23', NULL),
+(26, 28, 'sadasd', 'sadas', 'sadasd', 'Male', '2023-07-26', 'asdas', 'sadas@gmaiscsaldjsaldkjs.com', 'asdasd', 'Yes', 'sadasd', '2023-07-21 12:55:01', NULL);
 
 -- --------------------------------------------------------
 
@@ -90,6 +91,8 @@ CREATE TABLE `lead_list` (
   `source_id` int(30) NOT NULL,
   `program_id` int(30) NOT NULL,
   `course_id` int(30) NOT NULL,
+  `status_id` int(30) NOT NULL,
+  `update_history` int(30) NOT NULL,
   `interested_in` text NOT NULL,
   `remarks` text NOT NULL,
   `assigned_to` int(30) DEFAULT NULL,
@@ -105,40 +108,23 @@ CREATE TABLE `lead_list` (
 -- Dumping data for table `lead_list`
 --
 
-INSERT INTO `lead_list` (`id`, `code`, `source_id`, `program_id`, `course_id`, `interested_in`, `remarks`, `assigned_to`, `user_id`, `status`, `delete_flag`, `date_created`, `date_updated`, `in_opportunity`) VALUES
-(20, '202307-00013', 7, 2, 5, '', 'wqeqwe', 11, 1, 7, 0, '2023-07-18 12:10:25', '2023-07-19 11:01:13', 0),
-(21, '202307-00001', 10, 1, 2, '', 'sdadasd', 11, 1, 1, 0, '2023-07-18 12:19:07', '2023-07-19 16:20:51', 0);
+INSERT INTO `lead_list` (`id`, `code`, `source_id`, `program_id`, `course_id`, `status_id`, `update_history`, `interested_in`, `remarks`, `assigned_to`, `user_id`, `status`, `delete_flag`, `date_created`, `date_updated`, `in_opportunity`) VALUES
+(26, '202307-00005', 10, 1, 1, 0, 0, '', 'zxcz', 11, 1, 2, 0, '2023-07-20 17:01:04', '2023-07-21 12:49:22', 0),
+(27, '202307-00006', 10, 1, 1, 0, 0, '', 'asdasd', 9, 1, 0, 0, '2023-07-21 11:07:23', NULL, 0),
+(28, '202307-00001', 10, 2, 1, 0, 0, '', 'asdasd', 9, 1, 2, 0, '2023-07-21 12:55:01', '2023-07-21 14:58:12', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `lead_list_version`
+-- Table structure for table `lead_list_ver`
 --
 
-CREATE TABLE `lead_list_version` (
-  `id` int(30) NOT NULL,
+CREATE TABLE `lead_list_ver` (
+  `id` int(11) NOT NULL,
   `code` varchar(100) NOT NULL,
-  `source_id` int(30) NOT NULL,
-  `program_id` int(30) NOT NULL,
-  `course_id` int(30) NOT NULL,
-  `interested_in` text NOT NULL,
-  `remarks` text NOT NULL,
-  `assigned_to` int(30) DEFAULT NULL,
-  `user_id` int(30) DEFAULT NULL,
-  `status` tinyint(2) NOT NULL DEFAULT 0 COMMENT '0 = Open,\r\n1 = New Prospect,\r\n2 = Qualified,\r\n3 = Interviewed,\r\n4 = Target,\r\n5 = Follow Up\r\n',
-  `delete_flag` tinyint(1) NOT NULL DEFAULT 0,
-  `date_created` datetime NOT NULL DEFAULT current_timestamp(),
-  `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp(),
-  `in_opportunity` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `lead_list_version`
---
-
-INSERT INTO `lead_list_version` (`id`, `code`, `source_id`, `program_id`, `course_id`, `interested_in`, `remarks`, `assigned_to`, `user_id`, `status`, `delete_flag`, `date_created`, `date_updated`, `in_opportunity`) VALUES
-(20, '202307-00013', 7, 2, 5, '', 'wqeqwe', 11, 1, 7, 0, '2023-07-18 12:10:25', '2023-07-19 11:01:13', 0),
-(21, '202307-00001', 10, 1, 2, '', 'sdadasd', 11, 1, 0, 0, '2023-07-18 12:19:07', '2023-07-19 15:50:37', 0);
+  `status` tinyint(2) NOT NULL DEFAULT 0,
+  `date_updated` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -303,15 +289,10 @@ ALTER TABLE `lead_list`
   ADD KEY `course_id` (`course_id`);
 
 --
--- Indexes for table `lead_list_version`
+-- Indexes for table `lead_list_ver`
 --
-ALTER TABLE `lead_list_version`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `source_id` (`source_id`),
-  ADD KEY `assigned_to` (`assigned_to`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `program_id` (`program_id`),
-  ADD KEY `course_id` (`course_id`);
+ALTER TABLE `lead_list_ver`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `log_list`
@@ -361,7 +342,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `client_list`
 --
 ALTER TABLE `client_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `course_list`
@@ -373,13 +354,13 @@ ALTER TABLE `course_list`
 -- AUTO_INCREMENT for table `lead_list`
 --
 ALTER TABLE `lead_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
--- AUTO_INCREMENT for table `lead_list_version`
+-- AUTO_INCREMENT for table `lead_list_ver`
 --
-ALTER TABLE `lead_list_version`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+ALTER TABLE `lead_list_ver`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `log_list`
@@ -434,14 +415,6 @@ ALTER TABLE `lead_list`
   ADD CONSTRAINT `lead_list_ibfk_1` FOREIGN KEY (`source_id`) REFERENCES `source_list` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `lead_list_ibfk_2` FOREIGN KEY (`assigned_to`) REFERENCES `users` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `lead_list_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL;
-
---
--- Constraints for table `lead_list_version`
---
-ALTER TABLE `lead_list_version`
-  ADD CONSTRAINT `lead_list_version_ibfk_1` FOREIGN KEY (`source_id`) REFERENCES `source_list` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `lead_list_version_ibfk_2` FOREIGN KEY (`assigned_to`) REFERENCES `users` (`id`) ON DELETE SET NULL,
-  ADD CONSTRAINT `lead_list_version_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL;
 
 --
 -- Constraints for table `log_list`
