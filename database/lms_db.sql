@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 24, 2023 at 08:02 AM
+-- Generation Time: Jul 24, 2023 at 11:15 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -91,13 +91,12 @@ CREATE TABLE `lead_list` (
   `source_id` int(30) NOT NULL,
   `program_id` int(30) NOT NULL,
   `course_id` int(30) NOT NULL,
-  `status_id` int(30) NOT NULL,
   `updated_id` int(30) NOT NULL,
   `interested_in` text NOT NULL,
   `remarks` text NOT NULL,
   `assigned_to` int(30) DEFAULT NULL,
   `user_id` int(30) DEFAULT NULL,
-  `status` tinyint(2) NOT NULL DEFAULT 0 COMMENT '0 = Open,\r\n1 = New Prospect,\r\n2 = Qualified,\r\n3 = Interviewed,\r\n4 = Target,\r\n5 = Follow Up\r\n',
+  `status` tinyint(2) NOT NULL DEFAULT 0 COMMENT '0 = Open,\r\n1 = New Prospect,\r\n2 = Qualified,\r\n3 = Interviewed,\r\n4 = Target,\r\n5 = Follow Up,\r\n6 = Opportunity Created,\r\n7 = Opportunity Lost,\r\n8 = Inactive,\r\n9 = N/A\r\n',
   `delete_flag` tinyint(1) NOT NULL DEFAULT 0,
   `date_created` datetime NOT NULL DEFAULT current_timestamp(),
   `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp(),
@@ -108,10 +107,10 @@ CREATE TABLE `lead_list` (
 -- Dumping data for table `lead_list`
 --
 
-INSERT INTO `lead_list` (`id`, `code`, `source_id`, `program_id`, `course_id`, `status_id`, `updated_id`, `interested_in`, `remarks`, `assigned_to`, `user_id`, `status`, `delete_flag`, `date_created`, `date_updated`, `in_opportunity`) VALUES
-(26, '202307-00005', 10, 1, 1, 0, 0, '', 'zxcz', 11, 1, 3, 0, '2023-07-20 17:01:04', '2023-07-21 17:16:54', 0),
-(27, '202307-00006', 10, 1, 1, 0, 0, '', 'asdasd', 9, 1, 0, 0, '2023-07-21 11:07:23', NULL, 0),
-(28, '202307-00001', 10, 2, 1, 0, 0, '', 'asdasd', 9, 1, 1, 0, '2023-07-21 12:55:01', '2023-07-24 12:28:13', 0);
+INSERT INTO `lead_list` (`id`, `code`, `source_id`, `program_id`, `course_id`, `updated_id`, `interested_in`, `remarks`, `assigned_to`, `user_id`, `status`, `delete_flag`, `date_created`, `date_updated`, `in_opportunity`) VALUES
+(26, '202307-00005', 10, 1, 1, 0, '', 'zxcz', 11, 1, 3, 0, '2023-07-20 17:01:04', '2023-07-21 17:16:54', 0),
+(27, '202307-00006', 10, 1, 1, 0, '', 'asdasd', 9, 1, 1, 0, '2023-07-21 11:07:23', '2023-07-24 15:37:01', 0),
+(28, '202307-00001', 10, 2, 1, 0, '', 'asdasd', 9, 1, 2, 0, '2023-07-21 12:55:01', '2023-07-24 15:59:22', 0);
 
 -- --------------------------------------------------------
 
@@ -132,7 +131,12 @@ CREATE TABLE `lead_list_ver` (
 
 INSERT INTO `lead_list_ver` (`id`, `userid`, `status`, `date_updated`) VALUES
 (24, 26, 3, '2023-07-21 09:16:54'),
-(25, 28, 1, '2023-07-24 04:28:13');
+(25, 28, 1, '2023-07-24 04:28:13'),
+(26, 27, 1, '2023-07-24 07:37:01'),
+(27, 28, 3, '2023-07-24 07:43:10'),
+(28, 28, 0, '2023-07-24 07:46:10'),
+(29, 28, 1, '2023-07-24 07:54:55'),
+(30, 28, 2, '2023-07-24 07:59:22');
 
 -- --------------------------------------------------------
 
@@ -295,7 +299,6 @@ ALTER TABLE `lead_list`
   ADD KEY `user_id` (`user_id`),
   ADD KEY `program_id` (`program_id`),
   ADD KEY `course_id` (`course_id`),
-  ADD KEY `status_id` (`status_id`),
   ADD KEY `update_history` (`updated_id`),
   ADD KEY `updated_id` (`updated_id`);
 
@@ -372,7 +375,7 @@ ALTER TABLE `lead_list`
 -- AUTO_INCREMENT for table `lead_list_ver`
 --
 ALTER TABLE `lead_list_ver`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `log_list`
