@@ -24,11 +24,11 @@ if(isset($_GET['id'])){
                 <option value="3" <?= isset($status) && $status == 3 ? 'selected' : '' ?>>Interviewed</option>
                 <option value="4" <?= isset($status) && $status == 4 ? 'selected' : '' ?>>Target</option>
                 <option value="5" <?= isset($status) && $status == 5 ? 'selected' : '' ?>>Follow Up</option>
-                <?php if(isset($status) && $status == 6): ?>
                 <option value="6" <?= isset($status) && $status == 6 ? 'selected' : '' ?>>Opportunity Created</option>
-                <?php endif; ?>
                 <option value="7" <?= isset($status) && $status == 7 ? 'selected' : '' ?>>Opportunity Lost</option>
                 <option value="8" <?= isset($status) && $status == 8 ? 'selected' : '' ?>>Inactive</option>
+                <option value="9" <?= isset($status) && $status == 9 ? 'selected' : '' ?>>N/A</option>
+                
             </select>
         </div>
     </form>

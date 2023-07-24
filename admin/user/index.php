@@ -12,7 +12,6 @@ foreach($user->fetch_array() as $k =>$v){
 <div class="card card-outline card-primary">
 	<div class="card-body">
 		<div class="container-fluid">
-			<div id="msg"></div>
 			<form action="" id="manage-user">	
 				<input type="hidden" name="id" value="<?php echo $_settings->userdata('id') ?>">
 				<div class="form-group">

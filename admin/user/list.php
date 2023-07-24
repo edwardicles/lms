@@ -4,15 +4,7 @@
 </script>
 <?php endif;?>
 
-<style>
-    .img-avatar{
-        width:45px;
-        height:45px;
-        object-fit:cover;
-        object-position:center center;
-        border-radius:100%;
-    }
-</style>
+
 <div class="card card-outline card-primary">
 	<div class="card-header">
 		<h3 class="card-title">List of System Users</h3>
@@ -47,7 +39,7 @@
 						$i = 1;
 						$qry = $conn->query("SELECT *,concat(firstname,' ',lastname) as name from `users` where id != '1' order by concat(firstname,' ',lastname) asc ");
 						while($row = $qry->fetch_assoc()):
-					?>s
+					?>
 						<tr>
 							<td class="text-center"><?php echo $i++; ?></td>
 							<td><?php echo ucwords($row['name']) ?></td>
