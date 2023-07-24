@@ -83,7 +83,7 @@
                 <!-- History -->
                 
                 <!-- Trigger the modal with a button -->
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Check Status Update History</button>
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -92,10 +92,80 @@
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
+          <h4>Update History</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        <p></p>
+      <div class="table-responsive">
+
+<?php
+    $VIEW= "SELECT * FROM lead_list_ver WHERE userid = $id ORDER BY id DESC;";
+    $result = mysqli_query($conn, $VIEW);
+    $resultCheck = mysqli_num_rows($result);
+    if($resultCheck > 0){
+
+                
+
+?>
+<table class="table text-nowrap">
+    <thead>
+        <tr>
+            <th class="border-top-0">Status</th>
+            <th class="border-top-0">Date Updated</th>
+        </tr>
+    </thead>
+    <tbody>
+<?php
+        while($row = mysqli_fetch_assoc($result)){
+            echo "<tr>";
+            echo "<td>"; $status = ($row['status']);
+            switch($status){
+                case 0:
+                    echo '<span class="badge badge-primary bg-gradient-primary px-3 rounded-pill">Open</span>';
+                    break;
+                case 1:
+                    echo '<span class="badge badge-light bg-gradient-light border px-3 rounded-pill">New Prospect</span>';
+                    break;
+                case 2:
+                    echo '<span class="badge badge-primary bg-gradient-primary px-3 rounded-pill">Qualified</span>';
+                    break;
+                case 3:
+                    echo '<span class="badge badge-danger bg-gradient-danger px-3 rounded-pill">Interviewed</span>';
+                    break;
+                case 4:
+                    echo '<span class="badge badge-danger bg-gradient-danger px-3 rounded-pill">Target</span>';
+                    break;
+                case 5:
+                    echo '<span class="badge badge-info bg-gradient-info px-3 rounded-pill">Follow up</span>';
+                    break;
+                case 6:
+                    echo '<span class="badge badge-success bg-gradient-success px-3 rounded-pill">Opportunity Created</span>';
+                    break;
+                case 7:
+                    echo '<span class="badge badge-danger bg-gradient-danger px-3 rounded-pill">Opportunity Lost</span>';
+                    break;
+                case 8:
+                    echo '<span class="badge badge-danger bg-gradient-danger px-3 rounded-pill">Inactive</span>';
+                    break;
+                default:
+                    echo '<span class="badge badge-light bg-gradient-light border px-3 rounded-pill">N/A</span>';
+                        break;
+            }  echo "</td>";//to echo out, use the columns from the db table
+            
+            echo "<td>"; echo $row['date_updated']; echo "</td>";//to echo out, use the columns from the db table
+
+            echo "</tr>";
+
+        }
+    }
+        
+
+?>
+    </tbody>
+</table>
+</div>
+              
+        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
