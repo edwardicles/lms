@@ -38,10 +38,10 @@
             <span class="info-box-icon bg-gradient-maroon elevation-1"><i class="fas fa-circle"></i></span>
 
             <div class="info-box-content">
-            <span class="info-box-text">Total Opportunities</span>
+            <span class="info-box-text">Total Programs</span>
             <span class="info-box-number text-right">
                 <?php 
-                    echo $conn->query("SELECT * FROM `lead_list` where `in_opportunity` = 1 ")->num_rows;
+                    echo $conn->query("SELECT * FROM `program_list` ")->num_rows;
                 ?>
             </span>
             </div>

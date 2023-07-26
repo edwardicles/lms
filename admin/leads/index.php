@@ -9,6 +9,10 @@
 <div class="card card-outline card-primary rounded-0 shadow">
 	<div class="card-header">
 		<h3 class="card-title">List of Leads</h3>
+	
+
+
+
 		<?php  ?>
 		<div class="card-tools">
 			<a href="./?page=leads/manage_lead" class="btn btn-flat btn-sm btn-primary"><span class="fas fa-plus"></span>  Add New Leads</a>
@@ -96,7 +100,11 @@
 </tbody></div></div></div></div>
                                 </table>
 							
-		
+
+
+	
+
+
 <script>
 	$(document).ready(function(){
 		$('.delete_data').click(function(){
@@ -127,9 +135,16 @@
 		})
 	}
 </script>
+<!-- UPLOAD EXCEL -->
 
 <script>
   $(document).ready( function () {
 		$('.table').DataTable();
   });
   </script>
+  <div class="card-body">
+		<form action="" method="POST">
+			<input type="file" name="import_file" class="form-control" />
+			<button class="btn btn-primary mt-3">Import Excel File</button>
+		</form>
+	</div>				
