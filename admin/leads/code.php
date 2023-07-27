@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('dbconfig.php');
+include('config.php');
 
 require 'vendor/autoload.php';
 
@@ -30,7 +30,7 @@ if(isset($_POST['save_excel_data']))
                 $phone = $row['2'];
                 $course = $row['3'];
 
-                $studentQuery = "INSERT INTO students (fullname,email,phone,course) VALUES ('$fullname','$email','$phone','$course')";
+                $studentQuery = "INSERT INTO client_list (fullname,gender,dob,contact,email,address,other_info) VALUES ('$fullname','$email','$phone','$course')";
                 $result = mysqli_query($con, $studentQuery);
                 $msg = true;
             }
