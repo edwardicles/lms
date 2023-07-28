@@ -17,7 +17,7 @@ if(isset($_POST['save_excel_data']))
         $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($inputFileNamePath);
         $data = $spreadsheet->getActiveSheet()->toArray();
 
-        $count = "0";
+        $count = "1";
         foreach($data as $row)
         {
             if($count > 0)
@@ -44,20 +44,20 @@ if(isset($_POST['save_excel_data']))
         if(isset($msg))
         {
             $_SESSION['message'] = "Successfully Imported";
-            header('Location: index.php');
+            header('Location: admin/leads/index.php');
             exit(0);
         }
         else
         {
             $_SESSION['message'] = "Not Imported";
-            header('Location: index.php');
+            header('Location: admin/leads/index.php');
             exit(0);
         }
     }
     else
     {
         $_SESSION['message'] = "Invalid File";
-        header('Location: index.php');
+        header('Location: admin/leads/index.php');
         exit(0);
     }
 }

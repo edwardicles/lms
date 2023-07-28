@@ -6,6 +6,7 @@
         object-position:center center;
     }
 </style>
+
 <div class="card card-outline card-primary rounded-0 shadow">
 	<div class="card-header">
 		<h3 class="card-title">List of Leads</h3>
@@ -13,11 +14,11 @@
 
 
 
-		<?php  ?>
+		
 		<div class="card-tools">
 			<a href="./?page=leads/manage_lead" class="btn btn-flat btn-sm btn-primary"><span class="fas fa-plus"></span>  Add New Leads</a>
 		</div>
-		<?php  ?>
+		
 	</div>
 	<div class="card-body">
 		<div class="container-fluid">
@@ -142,20 +143,48 @@
 		$('.table').DataTable();
   });
   </script>
-  <div class="card-body">
-		<form action="" method="POST">
-			<input type="file" name="import_file" class="form-control" />
-			<button class="btn btn-primary mt-3">Import Excel File</button>
-		</form>
-	</div>				
-	<?php
 
+  <div class="container">
+        <div class="row">
+            <div class="col-md-12 mt-4">
+
+                <?php
+                if(isset($_SESSION['message']))
+                {
+                    echo "<h4>".$_SESSION['message']."</h4>";
+                    unset($_SESSION['message']);
+                }
+                ?>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h4>How to Import Excel Data into database in PHP</h4>
+                    </div>
+                    <div class="card-body">
+
+                        <form action="#" method="POST" enctype="multipart/form-data">
+
+                            <input type="file" name="import_file" class="form-control" />
+                            <button type="submit" name="save_excel_data" class="btn btn-primary mt-3">Import</button>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+	<?php
 require 'vendorr/autoload.php';
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 if(isset($_POST['save_excel_data']))
 {
+
+	
     $fileName = $_FILES['import_file']['name'];
     $file_ext = pathinfo($fileName, PATHINFO_EXTENSION);
 
@@ -167,19 +196,28 @@ if(isset($_POST['save_excel_data']))
         $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($inputFileNamePath);
         $data = $spreadsheet->getActiveSheet()->toArray();
 
+		$ctr = 0;
         $count = "0";
+		$fname = "";
+		
         foreach($data as $row)
         {
             if($count > 0)
             {
-                $fullname = $row['0'];
-                $email = $row['1'];
-                $phone = $row['2'];
-                $course = $row['3'];
+				$firstname = $row['0'];
+                $middlename = $row['1'];
+                $lastname = $row['2'];
+                $gender = $row['3'];
+                $contact = $row['4'];
+                $email = $row['5'];
+                $address = $row['6'];
+                $other_info = $row['7'];
+				$fname = $row['0'];
 
-                $studentQuery = "INSERT INTO client_list (fullname,gender,dob,contact,email,address,other_info) VALUES ('$fullname','$email','$phone','$course')";
-                $result = mysqli_query($con, $studentQuery);
+                // $studentQuery = "INSERT INTO client_list (firstname,middlename,lastname,gender,dob,contact,email,address,other_info) VALUES ('$firstname','$middlename','$flastname','$gender','$contact','$email','$address','$other_info')";
+                // $result = mysqli_query($con, $studentQuery);
                 $msg = true;
+				$ctr++;
             }
             else
             {
@@ -189,21 +227,21 @@ if(isset($_POST['save_excel_data']))
 
         if(isset($msg))
         {
-            $_SESSION['message'] = "Successfully Imported";
-            header('Location: index.php');
+            $_SESSION['message'] = "Successfully Imported $fname";
+			header('Location: admin/index.php?page=leads#');
             exit(0);
         }
         else
         {
             $_SESSION['message'] = "Not Imported";
-            header('Location: index.php');
+			header('Location: admin/?page=leads');
             exit(0);
         }
     }
     else
     {
         $_SESSION['message'] = "Invalid File";
-        header('Location: index.php');
+		header('Location: admin/?page=leads#');
         exit(0);
     }
 }

@@ -22,7 +22,7 @@ class DBConnection{
                 exit;
             }            
         }    
-        
+       
     }
     public function __destruct(){
         $this->conn->close();
