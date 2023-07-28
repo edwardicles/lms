@@ -1,8 +1,6 @@
 <?php
-session_start();
-include('config.php');
-
-
+include_once 'intialize.php';
+require 'vendorr/autoload.php';
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
@@ -24,12 +22,16 @@ if(isset($_POST['save_excel_data']))
         {
             if($count > 0)
             {
-                $fullname = $row['0'];
-                $email = $row['1'];
-                $phone = $row['2'];
-                $course = $row['3'];
+                $firstname = $row['0'];
+                $middlename = $row['1'];
+                $lastname = $row['2'];
+                $gender = $row['3'];
+                $contact = $row['4'];
+                $email = $row['5'];
+                $address = $row['6'];
+                $other_info = $row['7'];
 
-                $studentQuery = "INSERT INTO client_list (fullname,gender,dob,contact,email,address,other_info) VALUES ('$fullname','$email','$phone','$course')";
+                $studentQuery = "INSERT INTO client_list (firstname,middlename,lastname,gender,dob,contact,email,address,other_info) VALUES ('$firstname','$middlename','$flastname','$gender','$contact','$email','$address','$other_info')";
                 $result = mysqli_query($con, $studentQuery);
                 $msg = true;
             }
