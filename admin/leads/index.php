@@ -136,7 +136,6 @@
 		})
 	}
 </script>
-<!-- UPLOAD EXCEL -->
 
 <script>
   $(document).ready( function () {
@@ -144,6 +143,7 @@
   });
   </script>
 
+<<<<<<< Updated upstream
   <div class="container">
         <div class="row">
             <div class="col-md-12 mt-4">
@@ -178,13 +178,30 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 	<?php
 require 'vendorr/autoload.php';
+=======
+<!-- UPLOAD EXCEL -->
+<div class="card-body">
+		<form action="" method="POST" enctype="multipart/form-data">
+			<input type="file" name="import_file" class="form-control" />
+			<button class="btn btn-primary mt-3">Import Excel File</button>
+		</form>
+	</div>		
+	
+	<?php
+
+
+
+>>>>>>> Stashed changes
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 if(isset($_POST['save_excel_data']))
 {
+<<<<<<< Updated upstream
 
 	
+=======
+>>>>>>> Stashed changes
     $fileName = $_FILES['import_file']['name'];
     $file_ext = pathinfo($fileName, PATHINFO_EXTENSION);
 
@@ -196,14 +213,19 @@ if(isset($_POST['save_excel_data']))
         $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($inputFileNamePath);
         $data = $spreadsheet->getActiveSheet()->toArray();
 
+<<<<<<< Updated upstream
 		$ctr = 0;
         $count = "0";
 		$fname = "";
 		
+=======
+        $count = "0";
+>>>>>>> Stashed changes
         foreach($data as $row)
         {
             if($count > 0)
             {
+<<<<<<< Updated upstream
 				$firstname = $row['0'];
                 $middlename = $row['1'];
                 $lastname = $row['2'];
@@ -218,6 +240,21 @@ if(isset($_POST['save_excel_data']))
                 // $result = mysqli_query($con, $studentQuery);
                 $msg = true;
 				$ctr++;
+=======
+                $firstname = $row['0'];
+                $middlename = $row['1'];
+                $lastname = $row['2'];
+                $gender = $row['3'];
+                $dob = $row['4'];
+                $contact = $row['5'];
+                $email = $row['6'];
+                $address = $row['7'];
+                $other_info = $row['8'];
+
+                $clientQuery = "INSERT INTO client_list (firstname,middlename,lastname,gender,dob,contact,email,address,other_info) VALUES ('$firstname','$middlename','$lastname','$gender','$dob','$contact','$email','$address','$other_info')";
+                $result = mysqli_query($con, $clientQuery);
+                $msg = true;
+>>>>>>> Stashed changes
             }
             else
             {
@@ -227,22 +264,39 @@ if(isset($_POST['save_excel_data']))
 
         if(isset($msg))
         {
+<<<<<<< Updated upstream
             $_SESSION['message'] = "Successfully Imported $fname";
 			header('Location: admin/index.php?page=leads#');
+=======
+            $_SESSION['message'] = "Successfully Imported";
+            header('Location: index.php');
+>>>>>>> Stashed changes
             exit(0);
         }
         else
         {
             $_SESSION['message'] = "Not Imported";
+<<<<<<< Updated upstream
 			header('Location: admin/?page=leads');
+=======
+            header('Location: index.php');
+>>>>>>> Stashed changes
             exit(0);
         }
     }
     else
     {
         $_SESSION['message'] = "Invalid File";
+<<<<<<< Updated upstream
 		header('Location: admin/?page=leads#');
         exit(0);
     }
 }
 ?>
+=======
+        header('Location: index.php');
+        exit(0);
+    }
+}
+?>
+>>>>>>> Stashed changes
