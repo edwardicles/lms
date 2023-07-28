@@ -2,7 +2,6 @@
 session_start();
 include('config.php');
 
-require 'vendor/autoload.php';
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
