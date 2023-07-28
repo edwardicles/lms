@@ -26,15 +26,6 @@ if(isset($_POST['save_excel_data']))
                 $middlename = $row['1'];
                 $lastname = $row['2'];
                 $gender = $row['3'];
-<<<<<<< Updated upstream
-                $contact = $row['4'];
-                $email = $row['5'];
-                $address = $row['6'];
-                $other_info = $row['7'];
-
-                $studentQuery = "INSERT INTO client_list (firstname,middlename,lastname,gender,dob,contact,email,address,other_info) VALUES ('$firstname','$middlename','$flastname','$gender','$contact','$email','$address','$other_info')";
-                $result = mysqli_query($con, $studentQuery);
-=======
                 $dob = $row['4'];
                 $contact = $row['5'];
                 $email = $row['6'];
@@ -43,7 +34,6 @@ if(isset($_POST['save_excel_data']))
 
                 $clientQuery = "INSERT INTO client_list (firstname,middlename,lastname,gender,dob,contact,email,address,other_info) VALUES ('$firstname','$middlename','$lastname','$gender','$dob','$contact','$email','$address','$other_info')";
                 $result = mysqli_query($con, $clientQuery);
->>>>>>> Stashed changes
                 $msg = true;
             }
             else
