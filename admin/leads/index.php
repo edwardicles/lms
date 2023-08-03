@@ -100,12 +100,8 @@
 
 </tbody></div></div></div></div>
                                 </table>
-							
-
-
+						
 	
-
-
 <script>
 	$(document).ready(function(){
 		$('.delete_data').click(function(){
@@ -143,160 +139,154 @@
   });
   </script>
 
-<<<<<<< Updated upstream
-  <div class="container">
-        <div class="row">
-            <div class="col-md-12 mt-4">
+<!-- ============================ IMPORT CSV ============================== -->
 
-                <?php
-                if(isset($_SESSION['message']))
-                {
-                    echo "<h4>".$_SESSION['message']."</h4>";
-                    unset($_SESSION['message']);
-                }
-                ?>
+<?php
+// Load the database configuration file
+/* include_once '../classes/DBConnection.php'; */
 
-                <div class="card">
-                    <div class="card-header">
-                        <h4>How to Import Excel Data into database in PHP</h4>
-                    </div>
-                    <div class="card-body">
+// Get status message
+if(!empty($_GET['status'])){
+    switch($_GET['status']){
+        case 'succ':
+            $statusType = 'alert-success';
+            $statusMsg = 'Members data has been imported successfully.';
+            break;
+        case 'err':
+            $statusType = 'alert-danger';
+            $statusMsg = 'Some problem occurred, please try again.';
+            break;
+        case 'invalid_file':
+            $statusType = 'alert-danger';
+            $statusMsg = 'Please upload a valid CSV file.';
+            break;
+        default:
+            $statusType = '';
+            $statusMsg = '';
+    }
+}
+?>
 
-                        <form action="#" method="POST" enctype="multipart/form-data">
+<!-- Display status message -->
+<?php if(!empty($statusMsg)){ ?>
+<div class="col-xs-12">
+    <div class="alert <?php echo $statusType; ?>"><?php echo $statusMsg; ?></div>
+</div>
+<?php } ?>
+<div style="padding:2em;">
+<div class="row">
 
-                            <input type="file" name="import_file" class="form-control" />
-                            <button type="submit" name="save_excel_data" class="btn btn-primary mt-3">Import</button>
 
-                        </form>
-
-                    </div>
-                </div>
-            </div>
+    <!-- Import link -->
+    <div class="col-md-12 head">
+        <div class="float-left">
+            <a href="javascript:void(0);" class="btn btn-success" onclick="formToggle('importFrm');"><i class="plus"></i> Import</a>
         </div>
     </div>
+    <!-- CSV file upload form -->
+    <div class="col-md-12" id="importFrm" style="display: none;">
+        <form action="" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" />
+            <input type="submit" class="btn btn-primary" name="importSubmit" value="IMPORT">
+        </form>
+    </div>
+  
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-	<?php
-require 'vendorr/autoload.php';
-=======
-<!-- UPLOAD EXCEL -->
-<div class="card-body">
-		<form action="" method="POST" enctype="multipart/form-data">
-			<input type="file" name="import_file" class="form-control" />
-			<button class="btn btn-primary mt-3">Import Excel File</button>
-		</form>
-	</div>		
-	
-	<?php
+    <!-- Data list table --> 
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>#ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php
+        // Get member rows
+        $result = $conn->query("SELECT * FROM members ORDER BY id DESC");
+        if($result->num_rows > 0){
+            while($row = $result->fetch_assoc()){
+        ?>
+            <tr>
+                <td><?php echo $row['id']; ?></td>
+                <td><?php echo $row['name']; ?></td>
+                <td><?php echo $row['email']; ?></td>
+                <td><?php echo $row['phone']; ?></td>
+                <td><?php echo $row['status']; ?></td>
+            </tr>
+        <?php } }else{ ?>
+            <tr><td colspan="5">No member(s) found...</td></tr>
+        <?php } ?>
+        </tbody>
+    </table>
+</div>
+</div>
 
-
-
->>>>>>> Stashed changes
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-
-if(isset($_POST['save_excel_data']))
-{
-<<<<<<< Updated upstream
-
-	
-=======
->>>>>>> Stashed changes
-    $fileName = $_FILES['import_file']['name'];
-    $file_ext = pathinfo($fileName, PATHINFO_EXTENSION);
-
-    $allowed_ext = ['xls','csv','xlsx'];
-
-    if(in_array($file_ext, $allowed_ext))
-    {
-        $inputFileNamePath = $_FILES['import_file']['tmp_name'];
-        $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($inputFileNamePath);
-        $data = $spreadsheet->getActiveSheet()->toArray();
-
-<<<<<<< Updated upstream
-		$ctr = 0;
-        $count = "0";
-		$fname = "";
-		
-=======
-        $count = "0";
->>>>>>> Stashed changes
-        foreach($data as $row)
-        {
-            if($count > 0)
-            {
-<<<<<<< Updated upstream
-				$firstname = $row['0'];
-                $middlename = $row['1'];
-                $lastname = $row['2'];
-                $gender = $row['3'];
-                $contact = $row['4'];
-                $email = $row['5'];
-                $address = $row['6'];
-                $other_info = $row['7'];
-				$fname = $row['0'];
-
-                // $studentQuery = "INSERT INTO client_list (firstname,middlename,lastname,gender,dob,contact,email,address,other_info) VALUES ('$firstname','$middlename','$flastname','$gender','$contact','$email','$address','$other_info')";
-                // $result = mysqli_query($con, $studentQuery);
-                $msg = true;
-				$ctr++;
-=======
-                $firstname = $row['0'];
-                $middlename = $row['1'];
-                $lastname = $row['2'];
-                $gender = $row['3'];
-                $dob = $row['4'];
-                $contact = $row['5'];
-                $email = $row['6'];
-                $address = $row['7'];
-                $other_info = $row['8'];
-
-                $clientQuery = "INSERT INTO client_list (firstname,middlename,lastname,gender,dob,contact,email,address,other_info) VALUES ('$firstname','$middlename','$lastname','$gender','$dob','$contact','$email','$address','$other_info')";
-                $result = mysqli_query($con, $clientQuery);
-                $msg = true;
->>>>>>> Stashed changes
-            }
-            else
-            {
-                $count = "1";
-            }
-        }
-
-        if(isset($msg))
-        {
-<<<<<<< Updated upstream
-            $_SESSION['message'] = "Successfully Imported $fname";
-			header('Location: admin/index.php?page=leads#');
-=======
-            $_SESSION['message'] = "Successfully Imported";
-            header('Location: index.php');
->>>>>>> Stashed changes
-            exit(0);
-        }
-        else
-        {
-            $_SESSION['message'] = "Not Imported";
-<<<<<<< Updated upstream
-			header('Location: admin/?page=leads');
-=======
-            header('Location: index.php');
->>>>>>> Stashed changes
-            exit(0);
-        }
+<!-- Show/hide CSV upload form -->
+<script>
+function formToggle(ID){
+    var element = document.getElementById(ID);
+    if(element.style.display === "none"){
+        element.style.display = "block";
+    }else{
+        element.style.display = "none";
     }
-    else
-    {
-        $_SESSION['message'] = "Invalid File";
-<<<<<<< Updated upstream
-		header('Location: admin/?page=leads#');
-        exit(0);
+}
+</script>
+
+<!-- ============================== import data ====================== -->
+
+<?php 
+if(isset($_POST['importSubmit'])){
+    
+    // Allowed mime types
+    $csvMimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain');
+    
+    // Validate whether selected file is a CSV file
+    if(!empty($_FILES['file']['name']) && in_array($_FILES['file']['type'], $csvMimes)){
+        
+        // If the file is uploaded
+        if(is_uploaded_file($_FILES['file']['tmp_name'])){
+            
+            // Open uploaded CSV file with read-only mode
+            $csvFile = fopen($_FILES['file']['tmp_name'], 'r');
+            
+            // Skip the first line
+            fgetcsv($csvFile);
+            
+            // Parse data from CSV file line by line
+            while(($line = fgetcsv($csvFile)) !== FALSE){
+                // Get row data
+                $name   = $line[0];
+                $email  = $line[1];
+                $phone  = $line[2];
+                $status = $line[3];
+                
+                // Check whether member already exists in the database with the same email
+                $prevQuery = "SELECT id FROM members WHERE email = '".$line[1]."'";
+                $prevResult = $conn->query($prevQuery);
+                
+                if($prevResult->num_rows > 0){
+                    // Update member data in the database
+                    $conn->query("UPDATE members SET name = '".$name."', phone = '".$phone."', status = '".$status."', modified = NOW() WHERE email = '".$email."'");
+                }else{
+                    // Insert member data in the database
+                    $conn->query("INSERT INTO members (name, email, phone, created, modified, status) VALUES ('".$name."', '".$email."', '".$phone."', NOW(), NOW(), '".$status."')");
+                }
+            }
+            
+            // Close opened CSV file
+            fclose($csvFile);
+            
+            $qstring = '?status=succ';
+        }else{
+            $qstring = '?status=err';
+        }
+    }else{
+        $qstring = '?status=invalid_file';
     }
 }
 ?>
-=======
-        header('Location: index.php');
-        exit(0);
-    }
-}
-?>
->>>>>>> Stashed changes
