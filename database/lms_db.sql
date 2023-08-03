@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 24, 2023 at 11:15 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Aug 03, 2023 at 02:25 PM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 7.4.23
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -42,7 +42,7 @@ CREATE TABLE `client_list` (
   `other_info` text DEFAULT NULL,
   `date_created` datetime NOT NULL DEFAULT current_timestamp(),
   `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `client_list`
@@ -51,7 +51,8 @@ CREATE TABLE `client_list` (
 INSERT INTO `client_list` (`id`, `lead_id`, `firstname`, `middlename`, `lastname`, `gender`, `dob`, `contact`, `email`, `address`, `enrolled`, `other_info`, `date_created`, `date_updated`) VALUES
 (24, 26, 'zzzz', 'zzxcxzc', 'asdasdasd', 'Male', '2023-07-20', '231243141234', 'hykeem.symere@gmail.com', 'zxc', 'Yes', 'zxc', '2023-07-20 17:01:04', NULL),
 (25, 27, 'qqq', 'qqq', 'qqq', 'Male', '2023-07-21', '231243141234', 'hykeem.symere@gmail.com', 'sada', 'Yes', 'asdas', '2023-07-21 11:07:23', NULL),
-(26, 28, 'sadasd', 'sadas', 'sadasd', 'Male', '2023-07-26', 'asdas', 'sadas@gmaiscsaldjsaldkjs.com', 'asdasd', 'Yes', 'sadasd', '2023-07-21 12:55:01', NULL);
+(26, 28, 'sadasd', 'sadas', 'sadasd', 'Male', '2023-07-26', 'asdas', 'sadas@gmaiscsaldjsaldkjs.com', 'asdasd', 'Yes', 'sadasd', '2023-07-21 12:55:01', NULL),
+(27, 29, 'John', 'Red', 'Blue', 'Male', '2023-07-25', '0943543543543', 'syrisoky@lyft.live', '51 jupiter st.', 'Yes', 'opopopoppo', '2023-07-25 11:58:54', NULL);
 
 -- --------------------------------------------------------
 
@@ -61,13 +62,13 @@ INSERT INTO `client_list` (`id`, `lead_id`, `firstname`, `middlename`, `lastname
 
 CREATE TABLE `course_list` (
   `id` int(30) NOT NULL,
-  `course` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `course` text CHARACTER SET utf8mb4 NOT NULL,
+  `description` text CHARACTER SET utf8mb4 NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1,
   `delete_flag` tinyint(1) NOT NULL DEFAULT 0,
   `date_created` datetime NOT NULL DEFAULT current_timestamp(),
   `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `course_list`
@@ -91,26 +92,28 @@ CREATE TABLE `lead_list` (
   `source_id` int(30) NOT NULL,
   `program_id` int(30) NOT NULL,
   `course_id` int(30) NOT NULL,
+  `status_id` int(30) NOT NULL,
   `updated_id` int(30) NOT NULL,
   `interested_in` text NOT NULL,
   `remarks` text NOT NULL,
   `assigned_to` int(30) DEFAULT NULL,
   `user_id` int(30) DEFAULT NULL,
-  `status` tinyint(2) NOT NULL DEFAULT 0 COMMENT '0 = Open,\r\n1 = New Prospect,\r\n2 = Qualified,\r\n3 = Interviewed,\r\n4 = Target,\r\n5 = Follow Up,\r\n6 = Opportunity Created,\r\n7 = Opportunity Lost,\r\n8 = Inactive,\r\n9 = N/A\r\n',
+  `status` tinyint(2) NOT NULL DEFAULT 0 COMMENT '0 = Open,\r\n1 = New Prospect,\r\n2 = Qualified,\r\n3 = Interviewed,\r\n4 = Target,\r\n5 = Follow Up\r\n',
   `delete_flag` tinyint(1) NOT NULL DEFAULT 0,
   `date_created` datetime NOT NULL DEFAULT current_timestamp(),
   `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp(),
   `in_opportunity` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `lead_list`
 --
 
-INSERT INTO `lead_list` (`id`, `code`, `source_id`, `program_id`, `course_id`, `updated_id`, `interested_in`, `remarks`, `assigned_to`, `user_id`, `status`, `delete_flag`, `date_created`, `date_updated`, `in_opportunity`) VALUES
-(26, '202307-00005', 10, 1, 1, 0, '', 'zxcz', 11, 1, 3, 0, '2023-07-20 17:01:04', '2023-07-21 17:16:54', 0),
-(27, '202307-00006', 10, 1, 1, 0, '', 'asdasd', 9, 1, 1, 0, '2023-07-21 11:07:23', '2023-07-24 15:37:01', 0),
-(28, '202307-00001', 10, 2, 1, 0, '', 'asdasd', 9, 1, 2, 0, '2023-07-21 12:55:01', '2023-07-24 15:59:22', 0);
+INSERT INTO `lead_list` (`id`, `code`, `source_id`, `program_id`, `course_id`, `status_id`, `updated_id`, `interested_in`, `remarks`, `assigned_to`, `user_id`, `status`, `delete_flag`, `date_created`, `date_updated`, `in_opportunity`) VALUES
+(26, '202307-00005', 10, 1, 1, 0, 0, '', 'zxcz', 11, 1, 2, 0, '2023-07-20 17:01:04', '2023-07-24 14:27:27', 0),
+(27, '202307-00006', 10, 1, 1, 0, 0, '', 'asdasd', 9, 1, 0, 0, '2023-07-21 11:07:23', NULL, 0),
+(28, '202307-00001', 10, 2, 1, 0, 0, '', 'asdasd', 9, 1, 1, 0, '2023-07-21 12:55:01', '2023-07-24 12:28:13', 0),
+(29, '202307-00002', 10, 1, 1, 0, 0, '', 'lklkklklkl', 9, 1, 0, 0, '2023-07-25 11:58:54', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -123,7 +126,7 @@ CREATE TABLE `lead_list_ver` (
   `userid` int(11) NOT NULL,
   `status` tinyint(2) NOT NULL DEFAULT 0 COMMENT '0 = Open,\r\n1 = New Prospect,\r\n2 = Qualified,\r\n3 = Interviewed,\r\n4 = Target,\r\n5 = Follow Up\r\n',
   `date_updated` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `lead_list_ver`
@@ -132,11 +135,9 @@ CREATE TABLE `lead_list_ver` (
 INSERT INTO `lead_list_ver` (`id`, `userid`, `status`, `date_updated`) VALUES
 (24, 26, 3, '2023-07-21 09:16:54'),
 (25, 28, 1, '2023-07-24 04:28:13'),
-(26, 27, 1, '2023-07-24 07:37:01'),
-(27, 28, 3, '2023-07-24 07:43:10'),
-(28, 28, 0, '2023-07-24 07:46:10'),
-(29, 28, 1, '2023-07-24 07:54:55'),
-(30, 28, 2, '2023-07-24 07:59:22');
+(26, 26, 1, '2023-07-24 06:26:03'),
+(27, 26, 4, '2023-07-24 06:27:21'),
+(28, 26, 2, '2023-07-24 06:27:27');
 
 -- --------------------------------------------------------
 
@@ -152,7 +153,38 @@ CREATE TABLE `log_list` (
   `user_id` int(30) DEFAULT NULL,
   `date_created` datetime NOT NULL DEFAULT current_timestamp(),
   `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `members`
+--
+
+CREATE TABLE `members` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `phone` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  `status` enum('Active','Inactive') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Active'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `members`
+--
+
+INSERT INTO `members` (`id`, `name`, `email`, `phone`, `created`, `modified`, `status`) VALUES
+(1, '2', '001-002', 'name 2', '2023-08-03 20:11:59', '2023-08-03 20:11:59', ''),
+(2, '3', '001-003', 'name 3', '2023-08-03 20:11:59', '2023-08-03 20:11:59', ''),
+(3, '4', '001-004', 'name 4', '2023-08-03 20:11:59', '2023-08-03 20:11:59', ''),
+(4, '5', '001-005', 'name 5', '2023-08-03 20:11:59', '2023-08-03 20:11:59', ''),
+(5, '6', '001-006', 'name 6', '2023-08-03 20:11:59', '2023-08-03 20:11:59', ''),
+(6, '7', '001-007', 'name 7', '2023-08-03 20:11:59', '2023-08-03 20:11:59', ''),
+(7, '8', '001-008', 'name 8', '2023-08-03 20:11:59', '2023-08-03 20:11:59', ''),
+(8, '9', '001-009', 'name 9', '2023-08-03 20:11:59', '2023-08-03 20:11:59', ''),
+(9, '10', '001-010', 'name 10', '2023-08-03 20:11:59', '2023-08-03 20:11:59', '');
 
 -- --------------------------------------------------------
 
@@ -167,7 +199,7 @@ CREATE TABLE `note_list` (
   `user_id` int(30) DEFAULT NULL,
   `date_created` datetime NOT NULL DEFAULT current_timestamp(),
   `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -177,13 +209,13 @@ CREATE TABLE `note_list` (
 
 CREATE TABLE `program_list` (
   `id` int(30) NOT NULL,
-  `program` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `program` text CHARACTER SET utf8mb4 NOT NULL,
+  `description` text CHARACTER SET utf8mb4 NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1,
   `delete_flag` tinyint(1) NOT NULL DEFAULT 0,
   `date_created` datetime NOT NULL DEFAULT current_timestamp(),
   `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `program_list`
@@ -207,7 +239,7 @@ CREATE TABLE `source_list` (
   `delete_flag` tinyint(1) NOT NULL DEFAULT 0,
   `date_created` datetime NOT NULL DEFAULT current_timestamp(),
   `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `source_list`
@@ -229,7 +261,7 @@ CREATE TABLE `system_info` (
   `id` int(30) NOT NULL,
   `meta_field` text NOT NULL,
   `meta_value` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `system_info`
@@ -260,7 +292,7 @@ CREATE TABLE `users` (
   `status` int(1) NOT NULL DEFAULT 1 COMMENT '0=not verified, 1 = verified',
   `date_added` datetime NOT NULL DEFAULT current_timestamp(),
   `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
@@ -299,6 +331,7 @@ ALTER TABLE `lead_list`
   ADD KEY `user_id` (`user_id`),
   ADD KEY `program_id` (`program_id`),
   ADD KEY `course_id` (`course_id`),
+  ADD KEY `status_id` (`status_id`),
   ADD KEY `update_history` (`updated_id`),
   ADD KEY `updated_id` (`updated_id`);
 
@@ -316,6 +349,12 @@ ALTER TABLE `log_list`
   ADD PRIMARY KEY (`id`),
   ADD KEY `lead_id` (`lead_id`),
   ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `members`
+--
+ALTER TABLE `members`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `note_list`
@@ -357,7 +396,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `client_list`
 --
 ALTER TABLE `client_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `course_list`
@@ -369,19 +408,25 @@ ALTER TABLE `course_list`
 -- AUTO_INCREMENT for table `lead_list`
 --
 ALTER TABLE `lead_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `lead_list_ver`
 --
 ALTER TABLE `lead_list_ver`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `log_list`
 --
 ALTER TABLE `log_list`
   MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `members`
+--
+ALTER TABLE `members`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `note_list`
