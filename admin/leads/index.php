@@ -196,26 +196,42 @@ if(!empty($_GET['status'])){
     <table class="table table-striped table-bordered">
         <thead class="thead-dark">
             <tr>
-                <th>#ID</th>
-                <th>Name</th>
+                <th>#ID</th>    
+                <th>Lead ID</th>
+                <th>First Name</th>
+                <th>Middle Name</th>
+                <th>Last Name</th>
+                <th>Gender</th>
+                <th>Date of Birth</th>
+                <th>Contact</th>
                 <th>Email</th>
-                <th>Phone</th>
-                <th>Status</th>
+                <th>Address</th>
+                <th>Enrolled</th>
+                <th>Other Info</th>
+                <th>Date Created</th>
             </tr>
         </thead>
         <tbody>
         <?php
         // Get member rows
-        $result = $conn->query("SELECT * FROM members ORDER BY id DESC");
+        $result = $conn->query("SELECT * FROM client_list ORDER BY id DESC");
         if($result->num_rows > 0){
             while($row = $result->fetch_assoc()){
         ?>
             <tr>
                 <td><?php echo $row['id']; ?></td>
-                <td><?php echo $row['name']; ?></td>
+                <td><?php echo $row['lead_id']; ?></td>
+                <td><?php echo $row['firstname']; ?></td>
+                <td><?php echo $row['middlename']; ?></td>
+                <td><?php echo $row['lastname']; ?></td>
+                <td><?php echo $row['gender']; ?></td>
+                <td><?php echo $row['dob']; ?></td>
+                <td><?php echo $row['contact']; ?></td>
                 <td><?php echo $row['email']; ?></td>
-                <td><?php echo $row['phone']; ?></td>
-                <td><?php echo $row['status']; ?></td>
+                <td><?php echo $row['address']; ?></td>
+                <td><?php echo $row['enrolled']; ?></td>
+                <td><?php echo $row['other_info']; ?></td>
+                <td><?php echo $row['date_created']; ?></td>
             </tr>
         <?php } }else{ ?>
             <tr><td colspan="5">No member(s) found...</td></tr>
@@ -260,21 +276,33 @@ if(isset($_POST['importSubmit'])){
             // Parse data from CSV file line by line
             while(($line = fgetcsv($csvFile)) !== FALSE){
                 // Get row data
-                $name   = $line[0];
-                $email  = $line[1];
-                $phone  = $line[2];
-                $status = $line[3];
+                $lead_id   = $line[0];
+                $firstname  = $line[1];
+                $middlename  = $line[2];
+                $lastname = $line[3];
+                $gender = $line[4];
+                $dob = $line[5];
+                $contact = $line[6];
+                $email = $line[7];
+                $address = $line[8];
+                $enrolled = $line[9];
+                $other_info = $line[10];
+                $date_created = $line[11];
                 
                 // Check whether member already exists in the database with the same email
-                $prevQuery = "SELECT id FROM members WHERE email = '".$line[1]."'";
+                $prevQuery = "SELECT id FROM client_list WHERE email = '".$line[7]."'";
                 $prevResult = $conn->query($prevQuery);
                 
                 if($prevResult->num_rows > 0){
                     // Update member data in the database
-                    $conn->query("UPDATE members SET name = '".$name."', phone = '".$phone."', status = '".$status."', modified = NOW() WHERE email = '".$email."'");
+                    $conn->query("UPDATE client_list SET lead_id = '".$lead_id."', firstname = '".$firstname."', middlename = '".$middlename."',  lastname = '".$lastname."',
+                    gender = '".$gender."', dob = '".$dob."', contact = '".$contact."', email = '".$email."', address = '".$address."',
+                    enrolled = '".$enrolled."', other_info = '".$other_info."', date_created = '".$date_created."', modified = NOW() WHERE email = '".$email."'");
                 }else{
                     // Insert member data in the database
-                    $conn->query("INSERT INTO members (name, email, phone, created, modified, status) VALUES ('".$name."', '".$email."', '".$phone."', NOW(), NOW(), '".$status."')");
+                    $conn->query("INSERT INTO client_list (lead_id, firstname, middlename, lastname, gender, dob, contact, email, address, enrolled, other_info, date_created) 
+                    VALUES ('".$lead_id."', '".$firstname."', '".$middlename."', '".$lastname."', '".$gender."', '".$dob."', '".$contact."', '".$email."',
+                     '".$address."', '".$enrolled."', '".$other_info."', '".$date_created."')");
                 }
             }
             
