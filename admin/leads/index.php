@@ -287,7 +287,6 @@ if(isset($_POST['importSubmit'])){
                 $address = $line[8];
                 $enrolled = $line[9];
                 $other_info = $line[10];
-                $date_created = $line[11];
                 
                 // Check whether member already exists in the database with the same email
                 $prevQuery = "SELECT id FROM client_list WHERE email = '".$line[7]."'";
@@ -297,12 +296,12 @@ if(isset($_POST['importSubmit'])){
                     // Update member data in the database
                     $conn->query("UPDATE client_list SET lead_id = '".$lead_id."', firstname = '".$firstname."', middlename = '".$middlename."',  lastname = '".$lastname."',
                     gender = '".$gender."', dob = '".$dob."', contact = '".$contact."', email = '".$email."', address = '".$address."',
-                    enrolled = '".$enrolled."', other_info = '".$other_info."', date_created = '".$date_created."', modified = NOW() WHERE email = '".$email."'");
+                    enrolled = '".$enrolled."', other_info = '".$other_info."', modified = NOW() WHERE email = '".$email."'");
                 }else{
                     // Insert member data in the database
                     $conn->query("INSERT INTO client_list (lead_id, firstname, middlename, lastname, gender, dob, contact, email, address, enrolled, other_info, date_created) 
                     VALUES ('".$lead_id."', '".$firstname."', '".$middlename."', '".$lastname."', '".$gender."', '".$dob."', '".$contact."', '".$email."',
-                     '".$address."', '".$enrolled."', '".$other_info."', '".$date_created."')");
+                     '".$address."', '".$enrolled."', '".$other_info."', NOW())");
                 }
             }
             
