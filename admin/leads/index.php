@@ -258,6 +258,20 @@ function formToggle(ID){
 <?php 
 if(isset($_POST['importSubmit'])){
     
+    //For Reference Code
+/*     $prefix = date("Ym-");
+			$code = sprintf("%'.05d",1);
+			while(true){
+				$check = $this->conn->query("SELECT * FROM `lead_list` where code = '{$prefix}{$code}'")->num_rows;
+				if($check > 0){
+					$code = sprintf("%'.05d",ceil($code) + 1);
+				}else{
+					break;
+				}
+			}
+			$_POST['code'] = $prefix.$code;
+			$_POST['user_id'] = $this->settings->userdata('id'); */
+
     // Allowed mime types
     $csvMimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain');
     
@@ -276,7 +290,7 @@ if(isset($_POST['importSubmit'])){
             // Parse data from CSV file line by line
             while(($line = fgetcsv($csvFile)) !== FALSE){
                 // Get row data
-                $lead_id   = $line[0];
+                $lead_id   = $line[0]; 
                 $firstname  = $line[1];
                 $middlename  = $line[2];
                 $lastname = $line[3];
@@ -289,19 +303,25 @@ if(isset($_POST['importSubmit'])){
                 $other_info = $line[10];
                 
                 // Check whether member already exists in the database with the same email
-                $prevQuery = "SELECT id FROM client_list WHERE email = '".$line[7]."'";
+                $prevQuery = "SELECT id FROM client_list WHERE email = '".$line[6]."'";
                 $prevResult = $conn->query($prevQuery);
                 
                 if($prevResult->num_rows > 0){
                     // Update member data in the database
-                    $conn->query("UPDATE client_list SET lead_id = '".$lead_id."', firstname = '".$firstname."', middlename = '".$middlename."',  lastname = '".$lastname."',
+                    $conn->query("UPDATE client_list SET  lead_id = '".$lead_id."', firstname = '".$firstname."', middlename = '".$middlename."',  lastname = '".$lastname."',
                     gender = '".$gender."', dob = '".$dob."', contact = '".$contact."', email = '".$email."', address = '".$address."',
                     enrolled = '".$enrolled."', other_info = '".$other_info."', modified = NOW() WHERE email = '".$email."'");
                 }else{
+
+                    //Insert data into lead_list
+             /*        $conn->query("INSERT INTO lead_list (code) VALUES ('".$code."')"); */
+
                     // Insert member data in the database
                     $conn->query("INSERT INTO client_list (lead_id, firstname, middlename, lastname, gender, dob, contact, email, address, enrolled, other_info, date_created) 
                     VALUES ('".$lead_id."', '".$firstname."', '".$middlename."', '".$lastname."', '".$gender."', '".$dob."', '".$contact."', '".$email."',
                      '".$address."', '".$enrolled."', '".$other_info."', NOW())");
+
+
                 }
             }
             
