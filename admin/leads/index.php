@@ -258,7 +258,7 @@ function formToggle(ID){
 <?php 
 
     //For Reference Code
-        $prefix = date("Ym-");
+/*         $prefix = date("Ym-");
         $code = sprintf("%'.05d",1);
         while(true){
             $check = $conn->query("SELECT * FROM `lead_list` where code = '{$prefix}{$code}'")->num_rows;
@@ -267,7 +267,7 @@ function formToggle(ID){
             }else{
                 break;
             }
-        }
+        } */
 /*         $_POST['code'] = $prefix.$code;
         $_POST['user_id'] = $this->settings->userdata('id'); */
 
@@ -309,7 +309,7 @@ function formToggle(ID){
                 $queryID="SELECT `id` FROM `lead_list` WHERE code = '".$line[11]."'";
                 $selectID=$conn->query($queryID);
                 while ($row = $selectID->fetch_assoc()) {
-                /* $StrArrayID = str_split($selectID, 3); */
+      
 
                 // Check whether member already exists in the database with the same email
                 $prevQuery = "SELECT id FROM client_list WHERE email = '".$line[7]."'";
@@ -319,14 +319,11 @@ function formToggle(ID){
                 $prevQueryClient = "SELECT id FROM lead_list WHERE code = '".$line[11]."'";
                 $prevResultClient = $conn->query($prevQueryClient);
                 
-                if($prevResultClient->num_rows > 0 && $prevResult->num_rows > 0){
+                if($prevResult->num_rows > 0 && $prevResultClient->num_rows > 0){
                     // Update member data in the database
                     $conn->query("UPDATE client_list SET lead_id = '".$row['id']."', firstname = '".$firstname."', middlename = '".$middlename."',  lastname = '".$lastname."',
                     gender = '".$gender."', dob = '".$dob."', contact = '".$contact."', email = '".$email."', address = '".$address."',
                     enrolled = '".$enrolled."', other_info = '".$other_info."', modified = NOW() WHERE email = '".$email."'");
-
-
-              
 
                     // Update member data in the database
                     $conn->query("UPDATE lead_list SET  code = '".$code."' WHERE code = '".$code."'");
@@ -334,10 +331,8 @@ function formToggle(ID){
                 }else{
 
                     //Insert data into lead_list
-                     /* $conn->query("INSERT INTO lead_list (code) VALUES ('".$code."')");  */
-
-                     $conn->query("INSERT INTO lead_list (code, source_id, program_id, course_id, status_id, updated_id, interested_in, remarks, assigned_to, user_id, status, delete_flag, date_created, date_updated, in_opportunity)   
-                     VALUES('".$code."', '10', '1', '1', '0', '0', ' ', 'abc', '11', '1', '0','0', 'NOW()', 'NOW()', '0')");
+                    $conn->query("INSERT INTO lead_list (code, source_id, program_id, course_id, status_id, updated_id, interested_in, remarks, assigned_to, user_id, status, delete_flag, date_created, date_updated, in_opportunity)   
+                    VALUES('".$code."', '8', '1', '1', '0', '0', 'abc', 'abc', '1', '1', '0', '0', NOW(), NOW(), '0')");
 
                     // Insert member data in the database
                     $conn->query("INSERT INTO client_list (lead_id, firstname, middlename, lastname, gender, dob, contact, email, address, enrolled, other_info, date_created) 
